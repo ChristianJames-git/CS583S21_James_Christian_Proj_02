@@ -150,6 +150,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d673c7ff7f05fdb45a34003044d6bd1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  whiteMalePickSpear: {fileID: 3676473977311292541, guid: 8ef1262f5f1b9424f9b202bff28554b9,
+    type: 3}
 --- !u!4 &364007106
 Transform:
   m_ObjectHideFlags: 0
