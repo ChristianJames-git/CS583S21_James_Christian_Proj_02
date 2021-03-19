@@ -1,5 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -20,19 +22,34 @@ public class GameManager : MonoBehaviour
         playerStats.playerSprite = whiteMalePickSpear;
     }
 
-    public class PlayerStats
+    public void SavePlayer()
     {
-        public string playerName;
-        public Sprite playerSprite;
-        public List<int> playerMobKillStats = new List<int>() { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-        public List<int> playerMiningStats = new List<int>() { 0, 0, 0, 0, 0, 0, 0 };
-        public float playerHP = 5;
-        public int playerMaxHP = 5;
-        public int miningLevel = 1;  //pick , impoves mining damage
-        public int attackLevel = 1;  //sword, impoves attack damage
-        public int defenseLevel = 0; //armor, resists damage
-        public int purse = 0;
-        public List<string> itemList = new List<string>();
+        BinaryFormatter formatter = new BinaryFormatter();
+        string path = Application.persistentDataPath + "/player.hello";
+        FileStream stream = new FileStream(path, FileMode.Create);
+
+        formatter.Serialize(stream, playerStats);
+        stream.Close();
+    }
+
+    public PlayerStats LoadPlayer()
+    {
+        string path = Application.persistentDataPath + "/player.hello";
+        if (File.Exists(path))
+        {
+            BinaryFormatter formatter = new BinaryFormatter();
+            FileStream stream = new FileStream(path, FileMode.Open);
+
+            PlayerStats stats = formatter.Deserialize(stream) as PlayerStats;
+            stream.Close();
+
+            return stats;
+        }
+        else
+        {
+            Debug.LogError("Save file not found in" + path);
+            return null;
+        }
     }
 }
 
