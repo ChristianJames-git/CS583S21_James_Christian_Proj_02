@@ -151,24 +151,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1971092465}
+  pos: {x: 0, y: 0, z: 0}
   playerAnim: {fileID: 1971092466}
-  gm: {fileID: 0}
-  ps:
-    playerName: 
-    playerSprite: {fileID: 0}
-    position:
-    - 0
-    - 0
-    - 0
-    playerMobKillStats: 000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
-    playerMiningStats: 00000000000000000000000000000000000000000000000000000000
-    playerHP: 5
-    playerMaxHP: 5
-    miningLevel: 1
-    attackLevel: 1
-    defenseLevel: 0
-    purse: 0
-    itemList: []
 --- !u!4 &1049539017
 Transform:
   m_ObjectHideFlags: 0
@@ -291,6 +275,7 @@ GameObject:
   - component: {fileID: 1971092468}
   - component: {fileID: 1971092467}
   - component: {fileID: 1971092466}
+  - component: {fileID: 1971092470}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -404,6 +389,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1971092470
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1971092465}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b0f262064ea21543b191a3f91b4425a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1971092465}
+  pos: {x: 0, y: 0, z: 0}
+  playerAnim: {fileID: 1971092466}
 --- !u!1 &1989539924
 GameObject:
   m_ObjectHideFlags: 0

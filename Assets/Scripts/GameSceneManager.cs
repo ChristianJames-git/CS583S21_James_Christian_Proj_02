@@ -5,14 +5,15 @@ using UnityEngine;
 public class GameSceneManager : MonoBehaviour
 {
     public GameObject player;
+    public Vector3 pos;
     public Animator playerAnim;
-    public GameManager gm = GameManager.Instance;
-    public PlayerStats ps = GameManager.Instance.playerStats;
+    private GameManager gm = GameManager.Instance;
+    private PlayerStats ps = GameManager.Instance.playerStats;
     float horizontalMove = 0f;
     float verticalMove = 0f;
     private void Update()
     {
-        player.transform.position = new Vector3(ps.position[0], ps.position[1], 0);
+        pos = transform.position;
         horizontalMove = Input.GetAxisRaw("Horizontal");
         verticalMove = Input.GetAxisRaw("Vertical");
     }
@@ -24,6 +25,15 @@ public class GameSceneManager : MonoBehaviour
 
     public void move(float horizontal, float vertical)
     {
+        if (horizontal > 0)
+            pos.x += ps.speed * Time.deltaTime;
+        if (horizontal < 0)
+            pos.x -= ps.speed * Time.deltaTime;
+        if (vertical > 0)
+            pos.y += ps.speed * Time.deltaTime;
+        if (vertical < 0)
+            pos.y -= ps.speed * Time.deltaTime;
+        transform.position = pos;
         Debug.Log(horizontal + "and" + vertical);
         playerAnim.SetInteger("Horizontal", (int)horizontal);
         playerAnim.SetInteger("Vertical", (int)vertical);
@@ -31,11 +41,15 @@ public class GameSceneManager : MonoBehaviour
 
     public void SavePlayer()
     {
+        ps.position[0] = pos.x;
+        ps.position[1] = pos.y;
         GameManager.Instance.SavePlayer();
     }
 
     public void LoadPlayer()
     {
         GameManager.Instance.LoadPlayer();
+        pos.x = ps.position[0];
+        pos.y = ps.position[1];
     }
 }
