@@ -17,12 +17,12 @@ public class GameSceneManager : MonoBehaviour
         pos = transform.position;
         horizontalMove = Input.GetAxisRaw("Horizontal");
         verticalMove = Input.GetAxisRaw("Vertical");
-        if (/*Input.GetMouseButtonDown(0)*/ Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             playerAnim.SetBool("Attack?", true);
             playerAnim.SetInteger("AttackDir", facingDir);
         }
-        if (/*Input.GetMouseButtonUp(0)*/ Input.GetKeyUp(KeyCode.Space)) 
+        if (Input.GetKeyUp(KeyCode.Space)) 
         {
             playerAnim.SetBool("Attack?", false);
         }

@@ -7,7 +7,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public PlayerStats playerStats;
-    public Sprite whiteMalePickSpear;
+    public Sprite mainChar;
     public static GameManager Instance { get; private set; }
 
     void Awake()
@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         playerStats = new PlayerStats();
-        playerStats.playerSprite = whiteMalePickSpear;
+        playerStats.playerSprite = mainChar;
     }
 
     public void SavePlayer()
