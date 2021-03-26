@@ -7,11 +7,15 @@ public class GameSceneManager : MonoBehaviour
     public GameObject player;
     public Vector3 pos;
     public Animator playerAnim;
-    private GameManager gm = GameManager.Instance;
-    private PlayerStats ps = GameManager.Instance.playerStats;
+    private GameManager gm;
     float horizontalMove = 0f;
     float verticalMove = 0f;
     int facingDir;
+
+    private void Start()
+    {
+        gm = GameManager.Instance;
+    }
     private void Update()
     {
         pos = transform.position;
@@ -37,22 +41,22 @@ public class GameSceneManager : MonoBehaviour
     {
         if (horizontal > 0)
         {
-            pos.x += ps.speed * Time.deltaTime;
+            pos.x += gm.playerStats.speed * Time.deltaTime;
             facingDir = 1;
         }
         if (horizontal < 0)
         {
-            pos.x -= ps.speed * Time.deltaTime;
+            pos.x -= gm.playerStats.speed * Time.deltaTime;
             facingDir = 3;
         }
         if (vertical > 0)
         {
-            pos.y += ps.speed * Time.deltaTime;
+            pos.y += gm.playerStats.speed * Time.deltaTime;
             facingDir = 0;
         }
         if (vertical < 0)
         {
-            pos.y -= ps.speed * Time.deltaTime;
+            pos.y -= gm.playerStats.speed * Time.deltaTime;
             facingDir = 2;
         }
         transform.position = pos;
@@ -62,15 +66,15 @@ public class GameSceneManager : MonoBehaviour
 
     public void SavePlayer()
     {
-        ps.position[0] = pos.x;
-        ps.position[1] = pos.y;
+        gm.playerStats.position[0] = pos.x;
+        gm.playerStats.position[1] = pos.y;
         GameManager.Instance.SavePlayer();
     }
 
     public void LoadPlayer()
     {
         GameManager.Instance.LoadPlayer();
-        pos.x = ps.position[0];
-        pos.y = ps.position[1];
+        pos.x = gm.playerStats.position[0];
+        pos.y = gm.playerStats.position[1];
     }
 }
