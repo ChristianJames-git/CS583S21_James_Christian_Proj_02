@@ -11,10 +11,13 @@ public class GameSceneManager : MonoBehaviour
     float horizontalMove = 0f;
     float verticalMove = 0f;
     int facingDir;
+    bool inShop;
 
     private void Start()
     {
         gm = GameManager.Instance;
+        inShop = false;
+        pos.x = 0; pos.y = 0;
     }
     private void Update()
     {
@@ -29,6 +32,20 @@ public class GameSceneManager : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.Space)) 
         {
             playerAnim.SetBool("Attack?", false);
+        }
+        if (!inShop && pos.y > 2.5)
+        {
+            pos.x = 25;
+            pos.y = 0;
+            transform.position = pos;
+            inShop = true;
+        }
+        if (inShop && pos.x > 29.5)
+        {
+            pos.x = 10.5f;
+            pos.y = 2.5f;
+            transform.position = pos;
+            inShop = false;
         }
     }
 
