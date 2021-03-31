@@ -8,15 +8,20 @@ public class GameSceneManager : MonoBehaviour
     public Vector3 pos;
     public Animator playerAnim;
     private GameManager gm;
+    private PlayerStats ps;
     float horizontalMove = 0f;
     float verticalMove = 0f;
     int facingDir;
-    bool inShop;
+    bool attacking;
+
+    bool inShopArea;
 
     private void Start()
     {
         gm = GameManager.Instance;
-        inShop = false;
+        ps = gm.playerStats;
+        inShopArea = false;
+        attacking = false;
         pos.x = 0; pos.y = 0;
     }
     private void Update()
@@ -27,53 +32,49 @@ public class GameSceneManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             playerAnim.SetBool("Attack?", true);
+            attacking = true;
             playerAnim.SetInteger("AttackDir", facingDir);
         }
         if (Input.GetKeyUp(KeyCode.Space)) 
         {
             playerAnim.SetBool("Attack?", false);
+            attacking = false;
         }
-        if (!inShop && pos.y > 2.5)
-        {
-            pos.x = 25;
-            pos.y = 0;
-            transform.position = pos;
-            inShop = true;
-        }
-        if (inShop && pos.x > 29.5)
+        if (inShopArea && pos.x > 29.5)
         {
             pos.x = 10.5f;
             pos.y = 2.5f;
             transform.position = pos;
-            inShop = false;
+            inShopArea = false;
         }
     }
 
     private void FixedUpdate()
     {
-        move(horizontalMove, verticalMove);
+        if (!attacking)
+            move(horizontalMove, verticalMove);
     }
 
     public void move(float horizontal, float vertical)
     {
         if (horizontal > 0)
         {
-            pos.x += gm.playerStats.speed * Time.deltaTime;
+            pos.x += ps.speed * Time.deltaTime;
             facingDir = 1;
         }
         if (horizontal < 0)
         {
-            pos.x -= gm.playerStats.speed * Time.deltaTime;
+            pos.x -= ps.speed * Time.deltaTime;
             facingDir = 3;
         }
         if (vertical > 0)
         {
-            pos.y += gm.playerStats.speed * Time.deltaTime;
+            pos.y += ps.speed * Time.deltaTime;
             facingDir = 0;
         }
         if (vertical < 0)
         {
-            pos.y -= gm.playerStats.speed * Time.deltaTime;
+            pos.y -= ps.speed * Time.deltaTime;
             facingDir = 2;
         }
         transform.position = pos;
@@ -81,17 +82,25 @@ public class GameSceneManager : MonoBehaviour
         playerAnim.SetInteger("Vertical", (int)vertical);
     }
 
+    public void ToShop()
+    {
+        pos.x = 25;
+        pos.y = 0;
+        transform.position = pos;
+        inShopArea = true;
+    }
+
     public void SavePlayer()
     {
-        gm.playerStats.position[0] = pos.x;
-        gm.playerStats.position[1] = pos.y;
-        GameManager.Instance.SavePlayer();
+        ps.position[0] = pos.x;
+        ps.position[1] = pos.y;
+        gm.SavePlayer();
     }
 
     public void LoadPlayer()
     {
-        GameManager.Instance.LoadPlayer();
-        pos.x = gm.playerStats.position[0];
-        pos.y = gm.playerStats.position[1];
+        gm.LoadPlayer();
+        pos.x = ps.position[0];
+        pos.y = ps.position[1];
     }
 }
