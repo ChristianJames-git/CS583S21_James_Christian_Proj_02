@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class GameSceneManager : MonoBehaviour
 {
+    [SerializeField] private UI_Shop uiShop;
     public GameObject player;
     public Vector3 pos;
     public Animator playerAnim;
@@ -15,12 +16,14 @@ public class GameSceneManager : MonoBehaviour
     bool attacking;
 
     bool inShopArea;
+    bool inShop;
 
     private void Start()
     {
         gm = GameManager.Instance;
         ps = gm.playerStats;
         inShopArea = false;
+        inShop = false;
         attacking = false;
         pos.x = 0; pos.y = 0;
     }
@@ -46,6 +49,25 @@ public class GameSceneManager : MonoBehaviour
             pos.y = 2.5f;
             transform.position = pos;
             inShopArea = false;
+        }
+        if (!inShopArea && pos.y > 2.5)
+        {
+            ToShop();
+        }
+        if (inShopArea && pos.y > 6.5)
+        {
+            if (pos.x < 26.5)
+            {
+                uiShop.Show();
+                inShop = true;
+            }
+            else
+                ps.playerHP = ps.playerMaxHP;
+        }
+        if (inShop && pos.y < 6.5)
+        {
+            uiShop.Hide();
+            inShop = false;
         }
     }
 

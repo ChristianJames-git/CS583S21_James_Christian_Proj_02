@@ -9,10 +9,10 @@ public class TriggerAreas : MonoBehaviour
     {
         //if (collision.name == "HealTriggerArea")
         //    GameManager.Instance.playerStats.playerHP = GameManager.Instance.playerStats.playerMaxHP;
-        if (collision.gameObject.ToString() == "ShopDoorTriggerArea")
-        {
-            Debug.Log("Fail");
-            gsm.ToShop();
-        }
+        //if (collision.tag == "ShopDoorTriggerArea")
+        //{
+        //    Debug.Log("Fail");
+        //    gsm.ToShop();
+        //}
     }
 }

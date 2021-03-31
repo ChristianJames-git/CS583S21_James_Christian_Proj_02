@@ -13,7 +13,6 @@ public class UI_Shop : MonoBehaviour
     {
         container = transform.Find("container");
         shopItemTemplate = container.Find("shopItemTemplate");
-        shopItemTemplate.gameObject.SetActive(false);
     }
 
     private void Start()
@@ -31,7 +30,7 @@ public class UI_Shop : MonoBehaviour
     private void CreateButtons (/*Sprite itemSprite,*/ string itemName, int itemPrice, int positionIndex)
     {
         Transform shopItemTransform = Instantiate(shopItemTemplate, container);
-        shopItemTransform.gameObject.SetActive(true);
+        shopItemTemplate.gameObject.SetActive(true);
         RectTransform shopItemRectTransform = shopItemTransform.GetComponent<RectTransform>();
 
         float shopItemHeight = 45f;
