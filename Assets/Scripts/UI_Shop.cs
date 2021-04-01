@@ -46,16 +46,6 @@ public class UI_Shop : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        Show();
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        Hide();
-    }
-
     public void Show()
     {
         gameObject.SetActive(true);

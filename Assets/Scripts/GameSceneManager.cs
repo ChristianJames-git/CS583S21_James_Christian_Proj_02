@@ -15,15 +15,10 @@ public class GameSceneManager : MonoBehaviour
     int facingDir;
     bool attacking;
 
-    bool inShopArea;
-    bool inShop;
-
     private void Start()
     {
         gm = GameManager.Instance;
         ps = gm.playerStats;
-        inShopArea = false;
-        inShop = false;
         attacking = false;
         pos.x = 0; pos.y = 0;
     }
@@ -42,32 +37,6 @@ public class GameSceneManager : MonoBehaviour
         {
             playerAnim.SetBool("Attack?", false);
             attacking = false;
-        }
-        if (inShopArea && pos.x > 29.5)
-        {
-            pos.x = 10.5f;
-            pos.y = 2.5f;
-            transform.position = pos;
-            inShopArea = false;
-        }
-        if (!inShopArea && pos.y > 2.5)
-        {
-            ToShop();
-        }
-        if (inShopArea && pos.y > 6.5)
-        {
-            if (pos.x < 26.5)
-            {
-                uiShop.Show();
-                inShop = true;
-            }
-            else
-                ps.playerHP = ps.playerMaxHP;
-        }
-        if (inShop && pos.y < 6.5)
-        {
-            uiShop.Hide();
-            inShop = false;
         }
     }
 
@@ -109,7 +78,13 @@ public class GameSceneManager : MonoBehaviour
         pos.x = 25;
         pos.y = 0;
         transform.position = pos;
-        inShopArea = true;
+    }
+
+    public void returnFromShop()
+    {
+        pos.x = 10.5f;
+        pos.y = 1;
+        transform.position = pos;
     }
 
     public void SavePlayer()
