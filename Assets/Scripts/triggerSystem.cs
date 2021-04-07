@@ -24,8 +24,16 @@ public class triggerSystem : MonoBehaviour
                 GameManager.Instance.playerStats.playerHP = GameManager.Instance.playerStats.playerMaxHP;
                 break;
             case "mineEntrance":
-                SceneManager.LoadScene("MineScene");
+                gsm.ToMine();
+                gsm.Unlock(1);
                 break;
+            case "Chest1":
+                gsm.Chest(0);
+                break;
+            case "mineExit":
+                gsm.FromMine();
+                break;
+
         }
     }
 
