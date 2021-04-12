@@ -53,7 +53,7 @@ public class GameManager : MonoBehaviour
     }
 }
 
-public class MobEntity
+/*public class MobEntity
 {
     public int mobNum;
     public string mobName;
@@ -152,9 +152,9 @@ public class MobEntity
         coinWorth = (int)(coinWorth * 0.5 * multiplier);
         damage = damage * multiplier;
     }
-}
+}*/
 
-public class rockEntity
+/*public class rockEntity
 {
     public int rockNum;
     public float currHP;
@@ -165,4 +165,4 @@ public class rockEntity
         rockNum = rockType;
         currHP = maxHP = rockType + 1;
     }
-}
+}*/

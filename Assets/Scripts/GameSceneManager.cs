@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
 
 public class GameSceneManager : MonoBehaviour
@@ -24,6 +23,9 @@ public class GameSceneManager : MonoBehaviour
     public List<GameObject> doorList;
     bool[] chestCollected = new bool[1];
     bool[] doorUnlocked;
+    public List<Riddle> easyRiddles;
+    public List<Riddle> mediumRiddles;
+    public List<Riddle> hardRiddles;
 
     private void Start()
     {
@@ -57,10 +59,6 @@ public class GameSceneManager : MonoBehaviour
 
         healthDisplay.text = ps.playerHP + " / " + ps.playerMaxHP;
         purseDisplay.text = "" + ps.purse;
-    }
-
-    private void FixedUpdate()
-    {
     }
 
     public void move(float horizontal, float vertical)
@@ -135,6 +133,23 @@ public class GameSceneManager : MonoBehaviour
         Debug.Log(ps.purse);
     }
 
+    public void InstantiateRiddles()
+    {
+        easyRiddles.Add(new Riddle("I follow you all the time and copy your every move, but you can’t touch me or catch me. What am I?", new string[] { "shadow" }, false));
+        easyRiddles.Add(new Riddle("What has many keys but can’t open a single lock?", new string[] { "piano" }, false));
+        easyRiddles.Add(new Riddle("Where does today come before yesterday?", new string[] { "dictionary" }, false));
+        easyRiddles.Add(new Riddle("What invention lets you look right through a wall?", new string[] { "window" }, false));
+        easyRiddles.Add(new Riddle("What begins with an 'e', ends with an 'e', and only contains one letter?", new string[] { "envelope" }, false));
+        easyRiddles.Add(new Riddle("If you’re running in a race and you pass the person in second place, what place are you in?", new string[] { "second", "second place" }, false));
+        easyRiddles.Add(new Riddle("What has to be broken before you can use it?", new string[] { "egg" }, false));
+        mediumRiddles.Add(new Riddle("What has a head and a tail but no body?", new string[] { "coin" , "penny" , "nickle" , "dime" , "quarter" }, false));
+        mediumRiddles.Add(new Riddle("It stalks the countryside with ears that can’t hear. What is it?", new string[] { "corn" }, false));
+        mediumRiddles.Add(new Riddle("What kind of coat is best put on wet?", new string[] { "paint" }, false));
+        mediumRiddles.Add(new Riddle("I am an odd number. Take away a letter and I become even. What number am I?", new string[] { "seven" , "7" }, false));
+        mediumRiddles.Add(new Riddle("Mary has four daughters, and each of her daughters has a brother. How many children does Mary have?", new string[] { "five" , "5" }, false));
+        mediumRiddles.Add(new Riddle("What five-letter word becomes shorter when you add two letters to it?", new string[] { "short" }, false));
+
+    }
     public void SavePlayer()
     {
         ps.position[0] = pos.x;
@@ -147,5 +162,19 @@ public class GameSceneManager : MonoBehaviour
         gm.LoadPlayer();
         pos.x = ps.position[0];
         pos.y = ps.position[1];
+    }
+}
+
+public class Riddle
+{
+    string riddleText;
+    string[] riddleAnswer;
+    bool riddleComplete;
+
+    public Riddle (string text, string[] answer, bool complete)
+    {
+        riddleText = text;
+        riddleAnswer = answer;
+        riddleComplete = complete;
     }
 }
