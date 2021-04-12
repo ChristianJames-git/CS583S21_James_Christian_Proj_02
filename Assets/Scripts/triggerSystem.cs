@@ -25,15 +25,17 @@ public class triggerSystem : MonoBehaviour
                 break;
             case "mineEntrance":
                 gsm.ToMine();
-                gsm.Unlock(1);
                 break;
             case "Chest1":
                 gsm.Chest(0);
                 break;
             case "mineExit":
                 gsm.FromMine();
+                gsm.LockAll();
                 break;
-
+            case "Chest1Riddle":
+                gsm.ShowRiddle(0);
+                break;
         }
     }
 
@@ -43,6 +45,9 @@ public class triggerSystem : MonoBehaviour
         {
             case "shopArea":
                 uishop.Hide();
+                break;
+            case "Chest1Riddle":
+                gsm.Riddle.SetActive(false);
                 break;
         }
     }
