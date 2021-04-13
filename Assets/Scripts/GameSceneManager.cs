@@ -10,8 +10,14 @@ public class GameSceneManager : MonoBehaviour
     public GameObject Riddle;
     public TMP_Text RiddleText;
     public TMP_InputField RiddleAnswer;
+    public List<Riddle> riddleList = new List<Riddle>();
+    private string[] currentRiddleAnswers;
+    private int currentRiddle;
     public Vector3 pos;
     public Animator playerAnim;
+    public List<GameObject> doorList;
+    public GameObject door1, door2, door3, door4;
+    bool[] doorUnlocked;
     public Sprite unlockedDoor;
     public Sprite lockedDoor;
     public TMP_Text healthDisplay;
@@ -21,26 +27,20 @@ public class GameSceneManager : MonoBehaviour
     float horizontalMove = 0f;
     float verticalMove = 0f;
     int facingDir;
-    bool attacking;
-    public GameObject door1, door2, door3, door4;
-    private string[] currentRiddleAnswers;
+    bool attacking = false;
 
-    public List<GameObject> doorList;
-    bool[] doorUnlocked;
-    public List<Riddle> easyRiddles = new List<Riddle>();
-    public List<Riddle> mediumRiddles = new List<Riddle>();
-    public List<Riddle> hardRiddles = new List<Riddle>();
-    public List<Riddle> metaRiddles = new List<Riddle>();
 
     private void Start()
     {
         gm = GameManager.Instance;
         ps = gm.playerStats;
-        attacking = false;
+
         doorList.Add(door1); doorList.Add(door2); doorList.Add(door3); doorList.Add(door4);
         doorUnlocked = new bool[doorList.Count];
+
         InstantiateRiddles();
         Riddle.SetActive(false);
+
         pos.x = 0; pos.y = 0;
         transform.position = pos;
     }
@@ -61,22 +61,18 @@ public class GameSceneManager : MonoBehaviour
             attacking = false;
         }
         if (!attacking)
-            move(horizontalMove, verticalMove);
+            Move(horizontalMove, verticalMove);
 
         if (Riddle.activeSelf)
             for (int i = 0; i < currentRiddleAnswers.Length; i++)
                 if (RiddleAnswer.text.ToLower() == currentRiddleAnswers[i])
-                {
-                    Unlock(0);
-                    Unlock(1);
-                    RiddleText.text = "Correct! :)";
-                }
+                    RiddleComplete(currentRiddle);
 
         healthDisplay.text = ps.playerHP + " / " + ps.playerMaxHP;
         purseDisplay.text = "" + ps.purse;
     }
 
-    public void move(float horizontal, float vertical)
+    public void Move(float horizontal, float vertical)
     {
         if (horizontal > 0)
         {
@@ -110,7 +106,7 @@ public class GameSceneManager : MonoBehaviour
         transform.position = pos;
     }
 
-    public void returnFromShop()
+    public void ReturnFromShop()
     {
         pos.x = 10.5f;
         pos.y = 1;
@@ -139,12 +135,8 @@ public class GameSceneManager : MonoBehaviour
             doorList[i].GetComponent<BoxCollider2D>().enabled = true;
             doorList[i].GetComponent<SpriteRenderer>().sprite = lockedDoor;
         }
-        for (int j = 0; j < easyRiddles.Count; j++)
-            easyRiddles[j].riddleComplete = false;
-        for (int j = 0; j < mediumRiddles.Count; j++)
-            mediumRiddles[j].riddleComplete = false;
-        for (int j = 0; j < metaRiddles.Count; j++)
-            metaRiddles[j].riddleComplete = false;
+        for (int j = 0; j < riddleList.Count; j++)
+            riddleList[j].riddleComplete = false;
     }
 
     public void Unlock(int doorNum)
@@ -167,59 +159,62 @@ public class GameSceneManager : MonoBehaviour
     public void ShowRiddle(int category)
     {
         RiddleAnswer.interactable = true;
-        switch (category)
+        if (riddleList[category].riddleComplete)
         {
-            case 0:
-                if (metaRiddles[0].riddleComplete)
-                {
-                    RiddleText.text = "Riddle Complete";
-                    RiddleAnswer.interactable = false;
-                }
-                else
-                {
-                    RiddleText.text = metaRiddles[0].riddleText;
-                    metaRiddles[0].riddleViewed = true;
-                    currentRiddleAnswers = metaRiddles[0].riddleAnswer;
-                }
-                break;
-            case 1:
-                if (metaRiddles[1].riddleComplete)
-                {
-                    RiddleText.text = "Riddle Complete";
-                    RiddleAnswer.interactable = false;
-                }
-                else
-                {
-                    RiddleText.text = metaRiddles[1].riddleText;
-                    metaRiddles[1].riddleViewed = true;
-                    currentRiddleAnswers = metaRiddles[1].riddleAnswer;
-                }
-                break;
+            RiddleText.text = "Riddle Completed";
+            RiddleAnswer.interactable = false;
+        }
+        else
+        {
+            RiddleText.text = riddleList[category].riddleText;
+            riddleList[category].riddleViewed = true;
+            currentRiddleAnswers = riddleList[category].riddleAnswer;
+            currentRiddle = category;
         }
         Riddle.SetActive(true);
     }
 
+    public void RiddleComplete(int riddle)
+    {
+        riddleList[currentRiddle].riddleComplete = true;
+        RiddleText.text = "Correct! :)";
+        switch (riddle)
+        {
+            case 0:
+                Unlock(0);
+                Unlock(1);
+                break;
+            case 1:
+                Unlock(2);
+                Unlock(3);
+                break;
+        }
+    }
+
     public void InstantiateRiddles()
     {
-        easyRiddles.Add(new Riddle() { riddleText = "I follow you all the time and copy your every move, but you can’t touch me or catch me. What am I?", riddleAnswer = new string[] { "shadow" } });
-        Debug.Log("Help1");
-        easyRiddles.Add(new Riddle() { riddleText = "What has many keys but can’t open a single lock?", riddleAnswer = new string[] { "piano" } });
-        easyRiddles.Add(new Riddle() { riddleText = "Where does today come before yesterday?", riddleAnswer = new string[] { "dictionary" } });
-        easyRiddles.Add(new Riddle() { riddleText = "What invention lets you look right through a wall?", riddleAnswer = new string[] { "window" } });
-        easyRiddles.Add(new Riddle() { riddleText = "What begins with an 'e', ends with an 'e', and only contains one letter?", riddleAnswer = new string[] { "envelope" } });
-        easyRiddles.Add(new Riddle() { riddleText = "If you’re running in a race and you pass the person in second place, what place are you in?", riddleAnswer = new string[] { "second", "2nd" } });
-        easyRiddles.Add(new Riddle() { riddleText = "What has to be broken before you can use it?", riddleAnswer = new string[] { "egg" } });
-        mediumRiddles.Add(new Riddle() { riddleText = "What has a head and a tail but no body?", riddleAnswer = new string[] { "coin", "penny", "nickle", "dime", "quarter" } });
-        mediumRiddles.Add(new Riddle() { riddleText = "It stalks the countryside with ears that can’t hear. What is it?", riddleAnswer = new string[] { "corn" } });
-        mediumRiddles.Add(new Riddle() { riddleText = "What kind of coat is best put on wet?", riddleAnswer = new string[] { "paint" } });
-        mediumRiddles.Add(new Riddle() { riddleText = "I am an odd number. Take away a letter and I become even. What number am I?", riddleAnswer = new string[] { "seven", "7" } });
-        mediumRiddles.Add(new Riddle() { riddleText = "Mary has four daughters, and each of her daughters has a brother. How many children does Mary have?", riddleAnswer = new string[] { "five", "5" } });
-        mediumRiddles.Add(new Riddle() { riddleText = "What five-letter word becomes shorter when you add two letters to it?", riddleAnswer = new string[] { "short" } });
-        metaRiddles.Add(new Riddle() { riddleText = "What object resides behind the doors to the northwest?", riddleAnswer = new string[] { "chest", "crate" } });
-        metaRiddles.Add(new Riddle() { riddleText = "How many rocks are in the shop area?", riddleAnswer = new string[] { "fourteen", "14" } });
-        metaRiddles.Add(new Riddle() { riddleText = "How many doors are on the first floor of the mine?", riddleAnswer = new string[] { "" } });
-        metaRiddles.Add(new Riddle() { riddleText = "How many doors are on the second floor of the mine?", riddleAnswer = new string[] { "" } });
-        metaRiddles.Add(new Riddle() { riddleText = "What accessory adorns your face?", riddleAnswer = new string[] { "sunglasses", "shades" } });
+        //Tutorial Floor Riddles
+        riddleList.Add(new Riddle() { riddleText = "What object resides behind the doors to the northwest?", riddleAnswer = new string[] { "chest", "crate" } });
+        riddleList.Add(new Riddle() { riddleText = "How many rocks are in the shop area?", riddleAnswer = new string[] { "fourteen", "14" } });
+        //Floor 1 Riddles
+        riddleList.Add(new Riddle() { riddleText = "I follow you all the time and copy your every move, but you can’t touch me or catch me. What am I?", riddleAnswer = new string[] { "shadow" } });
+        riddleList.Add(new Riddle() { riddleText = "What has many keys but can’t open a single lock?", riddleAnswer = new string[] { "piano" } });
+        riddleList.Add(new Riddle() { riddleText = "Where does today come before yesterday?", riddleAnswer = new string[] { "dictionary" } });
+        riddleList.Add(new Riddle() { riddleText = "What invention lets you look right through a wall?", riddleAnswer = new string[] { "window" } });
+        riddleList.Add(new Riddle() { riddleText = "What begins with an 'e', ends with an 'e', and only contains one letter?", riddleAnswer = new string[] { "envelope" } });
+        riddleList.Add(new Riddle() { riddleText = "If you’re running in a race and you pass the person in second place, what place are you in?", riddleAnswer = new string[] { "second", "2nd" } });
+        riddleList.Add(new Riddle() { riddleText = "What has to be broken before you can use it?", riddleAnswer = new string[] { "egg" } });
+        //Floor 2 Riddles
+        riddleList.Add(new Riddle() { riddleText = "What has a head and a tail but no body?", riddleAnswer = new string[] { "coin", "penny", "nickle", "dime", "quarter" } });
+        riddleList.Add(new Riddle() { riddleText = "It stalks the countryside with ears that can’t hear. What is it?", riddleAnswer = new string[] { "corn" } });
+        riddleList.Add(new Riddle() { riddleText = "What kind of coat is best put on wet?", riddleAnswer = new string[] { "paint" } });
+        riddleList.Add(new Riddle() { riddleText = "I am an odd number. Take away a letter and I become even. What number am I?", riddleAnswer = new string[] { "seven", "7" } });
+        riddleList.Add(new Riddle() { riddleText = "Mary has four daughters, and each of her daughters has a brother. How many children does Mary have?", riddleAnswer = new string[] { "five", "5" } });
+        riddleList.Add(new Riddle() { riddleText = "What five-letter word becomes shorter when you add two letters to it?", riddleAnswer = new string[] { "short" } });
+        //Item Shop Riddles
+        riddleList.Add(new Riddle() { riddleText = "How many doors are on the first floor of the mine?", riddleAnswer = new string[] { "" } });
+        riddleList.Add(new Riddle() { riddleText = "How many doors are on the second floor of the mine?", riddleAnswer = new string[] { "" } });
+        riddleList.Add(new Riddle() { riddleText = "What accessory adorns your face?", riddleAnswer = new string[] { "sunglasses", "shades" } });
     }
     public void SavePlayer()
     {

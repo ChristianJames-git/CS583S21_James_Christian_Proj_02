@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class triggerSystem : MonoBehaviour
 {
@@ -15,7 +14,7 @@ public class triggerSystem : MonoBehaviour
                 gsm.ToShop();
                 break;
             case "returnTrigger":
-                gsm.returnFromShop();
+                gsm.ReturnFromShop();
                 break;
             case "shopArea":
                 uishop.Show();
@@ -48,6 +47,7 @@ public class triggerSystem : MonoBehaviour
                 break;
             case "Chest1Riddle":
                 gsm.Riddle.SetActive(false);
+                gsm.RiddleAnswer.text = "";
                 break;
         }
     }
