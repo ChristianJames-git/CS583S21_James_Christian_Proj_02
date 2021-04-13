@@ -32,8 +32,11 @@ public class triggerSystem : MonoBehaviour
                 gsm.FromMine();
                 gsm.LockAll();
                 break;
-            case "Chest1Riddle":
+            case "riddle1Chest":
                 gsm.ShowRiddle(0);
+                break;
+            case "riddle2Doors":
+                gsm.ShowRiddle(1);
                 break;
         }
     }
@@ -45,7 +48,8 @@ public class triggerSystem : MonoBehaviour
             case "shopArea":
                 uishop.Hide();
                 break;
-            case "Chest1Riddle":
+            case "riddle1Chest":
+            case "riddle2Doors":
                 gsm.Riddle.SetActive(false);
                 gsm.RiddleAnswer.text = "";
                 break;
