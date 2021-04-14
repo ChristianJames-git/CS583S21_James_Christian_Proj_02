@@ -5,30 +5,36 @@ using TMPro;
 
 public class GameSceneManager : MonoBehaviour
 {
+    private GameManager gm;
+    private PlayerStats ps;
     [SerializeField] private UI_Shop uiShop;
+
     public GameObject player;
+    public Animator playerAnim;
+    public Vector3 pos;
+    float horizontalMove = 0f;
+    float verticalMove = 0f;
+    int facingDir;
+    bool attacking = false;
+
     public GameObject Riddle;
     public TMP_Text RiddleText;
     public TMP_InputField RiddleAnswer;
     public List<Riddle> riddleList = new List<Riddle>();
     private string[] currentRiddleAnswers;
     private int currentRiddle;
-    public Vector3 pos;
-    public Animator playerAnim;
+
     public List<GameObject> doorList;
     public GameObject door1, door2, door3, door4;
     bool[] doorUnlocked;
     public Sprite unlockedDoor;
     public Sprite lockedDoor;
+
+    public GameObject spikeTrap;
+    //public GameObject fireTrap;
+
     public TMP_Text healthDisplay;
     public TMP_Text purseDisplay;
-    private GameManager gm;
-    private PlayerStats ps;
-    float horizontalMove = 0f;
-    float verticalMove = 0f;
-    int facingDir;
-    bool attacking = false;
-
 
     private void Start()
     {
@@ -40,6 +46,8 @@ public class GameSceneManager : MonoBehaviour
 
         InstantiateRiddles();
         Riddle.SetActive(false);
+
+        CreateTraps();
 
         pos.x = 0; pos.y = 0;
         transform.position = pos;
@@ -72,7 +80,7 @@ public class GameSceneManager : MonoBehaviour
         purseDisplay.text = "" + ps.purse;
     }
 
-    public void Move(float horizontal, float vertical)
+    private void Move(float horizontal, float vertical)
     {
         if (horizontal > 0)
         {
@@ -125,9 +133,10 @@ public class GameSceneManager : MonoBehaviour
         pos.x = -7;
         pos.y = 0;
         transform.position = pos;
+        LockAll();
     }
 
-    public void LockAll()
+    private void LockAll()
     {
         for (int i = 0; i < doorList.Count; i++)
         {
@@ -139,7 +148,7 @@ public class GameSceneManager : MonoBehaviour
             riddleList[j].riddleComplete = false;
     }
 
-    public void Unlock(int doorNum)
+    private void Unlock(int doorNum)
     {
         doorUnlocked[doorNum] = true;
         doorList[doorNum].GetComponent<BoxCollider2D>().enabled = false;
@@ -174,7 +183,7 @@ public class GameSceneManager : MonoBehaviour
         Riddle.SetActive(true);
     }
 
-    public void RiddleComplete(int riddle)
+    private void RiddleComplete(int riddle)
     {
         riddleList[currentRiddle].riddleComplete = true;
         RiddleText.text = "Correct! :)";
@@ -220,6 +229,17 @@ public class GameSceneManager : MonoBehaviour
     private void CreateTraps ()
     {
         //Tutorial Floor Traps
+        CreateSpikeTrap(-44.5f, 6.5f);
+        CreateSpikeTrap(-44.5f, 7.5f);
+        CreateSpikeTrap(-44.5f, 8.5f);
+        CreateSpikeTrap(-44.5f, 9.5f);
+    }
+
+    private void CreateSpikeTrap (float x, float y)
+    {
+        GameObject newSpikeTrap = Instantiate(spikeTrap);
+        newSpikeTrap.SetActive(true);
+        newSpikeTrap.transform.position = new Vector2(x, y);
     }
 
     public void SavePlayer()

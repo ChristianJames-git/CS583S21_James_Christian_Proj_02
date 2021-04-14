@@ -30,7 +30,6 @@ public class triggerSystem : MonoBehaviour
                 break;
             case "mineExit":
                 gsm.FromMine();
-                gsm.LockAll();
                 break;
             case "riddle1Chest":
                 gsm.ShowRiddle(0);

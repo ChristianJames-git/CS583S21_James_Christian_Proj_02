@@ -27,7 +27,7 @@ public class UI_Shop : MonoBehaviour
         Hide();
     }
 
-    private void CreateButtons (/*Sprite itemSprite,*/ string itemName, int itemPrice, int positionIndex)
+    private void CreateButtons (string itemName, int itemPrice, int positionIndex)
     {
         Transform shopItemTransform = Instantiate(shopItemTemplate, container);
         shopItemTemplate.gameObject.SetActive(true);
@@ -38,7 +38,6 @@ public class UI_Shop : MonoBehaviour
 
         shopItemTransform.Find("itemName").GetComponent<TextMeshProUGUI>().SetText(itemName);
         shopItemTransform.Find("itemPrice").GetComponent<TextMeshProUGUI>().SetText(itemPrice.ToString());
-        //shopItemTransform.Find("itemImage").GetComponent<Image>().sprite = itemSprite;
         shopItemTransform.GetComponent<Button>().onClick.AddListener(test);
         void test()
         {
