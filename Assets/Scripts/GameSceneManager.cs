@@ -216,6 +216,12 @@ public class GameSceneManager : MonoBehaviour
         riddleList.Add(new Riddle() { riddleText = "How many doors are on the second floor of the mine?", riddleAnswer = new string[] { "" } });
         riddleList.Add(new Riddle() { riddleText = "What accessory adorns your face?", riddleAnswer = new string[] { "sunglasses", "shades" } });
     }
+
+    private void CreateTraps ()
+    {
+        //Tutorial Floor Traps
+    }
+
     public void SavePlayer()
     {
         ps.position[0] = pos.x;

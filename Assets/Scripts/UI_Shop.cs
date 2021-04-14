@@ -6,13 +6,13 @@ using UnityEngine.UI;
 
 public class UI_Shop : MonoBehaviour
 {
-    private Transform container;
-    private Transform shopItemTemplate;
+    public Transform container;
+    public Transform shopItemTemplate;
 
     private void Awake()
     {
-        container = transform.Find("container");
-        shopItemTemplate = container.Find("shopItemTemplate");
+        //container = transform.Find("container");
+        //shopItemTemplate = container.Find("shopItemTemplate");
     }
 
     private void Start()
@@ -33,7 +33,7 @@ public class UI_Shop : MonoBehaviour
         shopItemTemplate.gameObject.SetActive(true);
         RectTransform shopItemRectTransform = shopItemTransform.GetComponent<RectTransform>();
 
-        float shopItemHeight = 45f;
+        float shopItemHeight = 50f;
         shopItemRectTransform.anchoredPosition = new Vector2(0, -shopItemHeight * positionIndex);
 
         shopItemTransform.Find("itemName").GetComponent<TextMeshProUGUI>().SetText(itemName);
