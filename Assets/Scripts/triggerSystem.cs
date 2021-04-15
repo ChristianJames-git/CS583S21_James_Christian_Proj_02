@@ -94,6 +94,7 @@ public class triggerSystem : MonoBehaviour
                 break;
             case "riddle1Chest":
             case "riddle2Doors":
+            case "riddle3ToFloor1":
                 gsm.Riddle.SetActive(false);
                 gsm.RiddleAnswer.text = "";
                 break;
