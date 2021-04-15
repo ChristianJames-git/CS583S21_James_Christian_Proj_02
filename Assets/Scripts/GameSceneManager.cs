@@ -26,7 +26,7 @@ public class GameSceneManager : MonoBehaviour
     public TMP_Text TipText;
 
     public List<GameObject> doorList;
-    public GameObject door1, door2, door3, door4;
+    public GameObject door1, door2, door3, door4, door5;
     bool[] doorUnlocked;
     public Sprite unlockedDoor;
     public Sprite lockedDoor;
@@ -38,6 +38,8 @@ public class GameSceneManager : MonoBehaviour
     public TMP_Text purseDisplay;
 
     public GameObject DeathScreen;
+
+    private int spikeDamage = 3;
 
     private void Start()
     {
@@ -183,6 +185,9 @@ public class GameSceneManager : MonoBehaviour
                 Unlock(2);
                 Unlock(3);
                 break;
+            case 2:
+                Unlock(4);
+                break;
         }
     }
 
@@ -191,12 +196,12 @@ public class GameSceneManager : MonoBehaviour
         //Tutorial Floor Riddles
         riddleList.Add(new Riddle() { riddleText = "What object resides behind the doors to the northwest?", riddleAnswer = new string[] { "chest", "crate" } });
         riddleList.Add(new Riddle() { riddleText = "How many rocks are in the shop area?", riddleAnswer = new string[] { "fourteen", "14" } });
+        riddleList.Add(new Riddle() { riddleText = "What begins with an 'e', ends with an 'e', and only contains one letter?", riddleAnswer = new string[] { "envelope" } });
         //Floor 1 Riddles
         riddleList.Add(new Riddle() { riddleText = "I follow you all the time and copy your every move, but you can’t touch me or catch me. What am I?", riddleAnswer = new string[] { "shadow" } });
         riddleList.Add(new Riddle() { riddleText = "What has many keys but can’t open a single lock?", riddleAnswer = new string[] { "piano" } });
         riddleList.Add(new Riddle() { riddleText = "Where does today come before yesterday?", riddleAnswer = new string[] { "dictionary" } });
         riddleList.Add(new Riddle() { riddleText = "What invention lets you look right through a wall?", riddleAnswer = new string[] { "window" } });
-        riddleList.Add(new Riddle() { riddleText = "What begins with an 'e', ends with an 'e', and only contains one letter?", riddleAnswer = new string[] { "envelope" } });
         riddleList.Add(new Riddle() { riddleText = "If you’re running in a race and you pass the person in second place, what place are you in?", riddleAnswer = new string[] { "second", "2nd" } });
         riddleList.Add(new Riddle() { riddleText = "What has to be broken before you can use it?", riddleAnswer = new string[] { "egg" } });
         //Floor 2 Riddles
@@ -224,8 +229,20 @@ public class GameSceneManager : MonoBehaviour
     private void CreateSpikeTrap (float x, float y)
     {
         GameObject newSpikeTrap = Instantiate(spikeTrap);
+        newSpikeTrap.name = "Spike";
         newSpikeTrap.SetActive(true);
         newSpikeTrap.transform.position = new Vector2(x, y);
+    }
+
+    public void SpikeDamage()
+    {
+        ps.playerHP -= spikeDamage - ps.playerArmor;
+        if (ps.playerHP <= 0)
+        {
+            ps.playerHP = 0;
+            playerAnim.SetBool("Death", true);
+            DeathScreen.SetActive(true);
+        }
     }
 
     public void SavePlayer()

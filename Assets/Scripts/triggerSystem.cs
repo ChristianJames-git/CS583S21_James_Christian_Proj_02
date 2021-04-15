@@ -38,8 +38,6 @@ public class triggerSystem : MonoBehaviour
             case "Chest2":
                 gsm.Chest(1);
                 collision.GetComponent<Collider2D>().enabled = false;
-                gsm.playerAnim.SetBool("Death", true);
-                gsm.DeathScreen.SetActive(true);
                 break;
             //Riddles
             case "riddle1Chest":
@@ -47,6 +45,9 @@ public class triggerSystem : MonoBehaviour
                 break;
             case "riddle2Doors":
                 gsm.ShowRiddle(1);
+                break;
+            case "riddle3ToFloor1":
+                gsm.ShowRiddle(2);
                 break;
             //Tips
             case "tip1Start":
@@ -64,6 +65,10 @@ public class triggerSystem : MonoBehaviour
             case "tip4Trap":
                 gsm.TipText.text = "Traps do damage or otherwise negatively effect your wellbeing. I've left a few of them around for you. Enjoy :)";
                 gsm.Tip.SetActive(true);
+                break;
+            //Traps
+            case "Spike":
+                gsm.SpikeDamage();
                 break;
         }
     }
