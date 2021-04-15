@@ -28,6 +28,9 @@ public class triggerSystem : MonoBehaviour
             case "Chest1":
                 gsm.Chest(0);
                 break;
+            case "Chest2":
+                gsm.Chest(1);
+                break;
             case "mineExit":
                 gsm.FromMine();
                 break;

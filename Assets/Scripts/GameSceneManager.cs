@@ -159,10 +159,17 @@ public class GameSceneManager : MonoBehaviour
     {
         if (!ps.chestCollected[chestNum])
         {
-            ps.purse += 50;
+            switch (chestNum)
+            {
+                case 0:
+                    ps.purse += 50;
+                    break;
+                case 1:
+                    //Add reward, maybe achievement or +1 to health or accessory (or multiple)
+                    break;
+            }
             ps.chestCollected[chestNum] = true;
         }
-        Debug.Log(ps.purse);
     }
 
     public void ShowRiddle(int category)
