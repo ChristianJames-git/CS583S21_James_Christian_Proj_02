@@ -12,16 +12,25 @@ public class triggerSystem : MonoBehaviour
         {
             //Movements
             case "doorTrigger":
-                gsm.ToShop();
+                gsm.Teleport(25, 0);
                 break;
             case "returnTrigger":
-                gsm.ReturnFromShop();
+                gsm.Teleport(10.5f, 1);
                 break;
             case "mineEntrance":
-                gsm.ToMine();
+                gsm.Teleport(-52, 1);
                 break;
             case "mineExit":
-                gsm.FromMine();
+                gsm.Teleport(-7, 0);
+                gsm.LockAll();
+                break;
+            case "toFloor1":
+                //Location TBD
+                gsm.Teleport(0, 0);
+                break;
+            case "toFloor2":
+                //Location TBD
+                gsm.Teleport(0, 0);
                 break;
             //Shop
             case "shopArea":
@@ -68,7 +77,10 @@ public class triggerSystem : MonoBehaviour
                 break;
             //Traps
             case "Spike":
-                gsm.SpikeDamage();
+                gsm.TrapDamage(0);
+                break;
+            case "Fire":
+                gsm.TrapDamage(1);
                 break;
         }
     }

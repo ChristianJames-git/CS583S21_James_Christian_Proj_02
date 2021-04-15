@@ -5,41 +5,42 @@ using TMPro;
 
 public class GameSceneManager : MonoBehaviour
 {
+    //References
     private GameManager gm;
     private PlayerStats ps;
     [SerializeField] private UI_Shop uiShop;
-
+    //Player and Movement
     public GameObject player;
     public Animator playerAnim;
     public Vector3 pos;
     float horizontalMove = 0f;
     float verticalMove = 0f;
-
+    //Riddles
     public GameObject Riddle;
     public TMP_Text RiddleText;
     public TMP_InputField RiddleAnswer;
     public List<Riddle> riddleList = new List<Riddle>();
     private string[] currentRiddleAnswers;
     private int currentRiddle;
-
+    //Tips
     public GameObject Tip;
     public TMP_Text TipText;
-
+    //Doors
     public List<GameObject> doorList;
     public GameObject door1, door2, door3, door4, door5;
     bool[] doorUnlocked;
     public Sprite unlockedDoor;
     public Sprite lockedDoor;
-
+    //Traps
     public GameObject spikeTrap;
-    //public GameObject fireTrap;
-
+    private int spikeDamage = 40;
+    public GameObject fireTrap;
+    private int fireDamage = 60;
+    //HUD
     public TMP_Text healthDisplay;
     public TMP_Text purseDisplay;
-
+    //Death
     public GameObject DeathScreen;
-
-    private int spikeDamage = 3;
 
     private void Start()
     {
@@ -73,6 +74,7 @@ public class GameSceneManager : MonoBehaviour
         purseDisplay.text = "" + ps.purse;
     }
 
+    //Movements
     private void Move(float horizontal, float vertical)
     {
         if (horizontal > 0)
@@ -87,37 +89,14 @@ public class GameSceneManager : MonoBehaviour
         playerAnim.SetInteger("Horizontal", (int)horizontal);
         playerAnim.SetInteger("Vertical", (int)vertical);
     }
-
-    public void ToShop()
+    public void Teleport(float x, float y)
     {
-        pos.x = 25;
-        pos.y = 0;
+        pos.x = x;
+        pos.y = y;
         transform.position = pos;
     }
-
-    public void ReturnFromShop()
-    {
-        pos.x = 10.5f;
-        pos.y = 1;
-        transform.position = pos;
-    }
-
-    public void ToMine()
-    {
-        pos.x = -52;
-        pos.y = 1;
-        transform.position = pos;
-    }
-
-    public void FromMine()
-    {
-        pos.x = -7;
-        pos.y = 0;
-        transform.position = pos;
-        LockAll();
-    }
-
-    private void LockAll()
+    //Doors
+    public void LockAll()
     {
         for (int i = 0; i < doorList.Count; i++)
         {
@@ -128,14 +107,13 @@ public class GameSceneManager : MonoBehaviour
         for (int j = 0; j < riddleList.Count; j++)
             riddleList[j].riddleComplete = false;
     }
-
     private void Unlock(int doorNum)
     {
         doorUnlocked[doorNum] = true;
         doorList[doorNum].GetComponent<BoxCollider2D>().enabled = false;
         doorList[doorNum].GetComponent<SpriteRenderer>().sprite = unlockedDoor;
     }
-
+    //Chests
     public void Chest(int chestNum)
     {
         if (!ps.chestCollected[chestNum])
@@ -152,7 +130,7 @@ public class GameSceneManager : MonoBehaviour
             ps.chestCollected[chestNum] = true;
         }
     }
-
+    //Riddles
     public void ShowRiddle(int category)
     {
         RiddleAnswer.interactable = true;
@@ -170,7 +148,6 @@ public class GameSceneManager : MonoBehaviour
         }
         Riddle.SetActive(true);
     }
-
     private void RiddleComplete(int riddle)
     {
         riddleList[currentRiddle].riddleComplete = true;
@@ -190,7 +167,6 @@ public class GameSceneManager : MonoBehaviour
                 break;
         }
     }
-
     public void InstantiateRiddles()
     {
         //Tutorial Floor Riddles
@@ -216,7 +192,7 @@ public class GameSceneManager : MonoBehaviour
         riddleList.Add(new Riddle() { riddleText = "How many doors are on the second floor of the mine?", riddleAnswer = new string[] { "" } });
         riddleList.Add(new Riddle() { riddleText = "What accessory adorns your face?", riddleAnswer = new string[] { "sunglasses", "shades" } });
     }
-
+    //Traps
     private void CreateTraps ()
     {
         //Tutorial Floor Traps
@@ -225,7 +201,6 @@ public class GameSceneManager : MonoBehaviour
         CreateSpikeTrap(-44.5f, 8.5f);
         CreateSpikeTrap(-44.5f, 9.5f);
     }
-
     private void CreateSpikeTrap (float x, float y)
     {
         GameObject newSpikeTrap = Instantiate(spikeTrap);
@@ -233,10 +208,25 @@ public class GameSceneManager : MonoBehaviour
         newSpikeTrap.SetActive(true);
         newSpikeTrap.transform.position = new Vector2(x, y);
     }
-
-    public void SpikeDamage()
+    private void CreateFireTrap (float x, float y)
     {
-        ps.playerHP -= spikeDamage - ps.playerArmor;
+        GameObject newFireTrap = Instantiate(fireTrap);
+        newFireTrap.name = "Fire";
+        newFireTrap.SetActive(true);
+        newFireTrap.transform.position = new Vector2(x, y);
+    }
+    public void TrapDamage(int damage)
+    {
+        switch (damage)
+        {
+            case 0:
+                damage = spikeDamage;
+                break;
+            case 1:
+                damage = fireDamage;
+                break;
+        }
+        ps.playerHP -= damage - ps.playerArmor;
         if (ps.playerHP <= 0)
         {
             ps.playerHP = 0;
@@ -244,21 +234,20 @@ public class GameSceneManager : MonoBehaviour
             DeathScreen.SetActive(true);
         }
     }
-
+    //Save/Load
     public void SavePlayer()
     {
         ps.position[0] = pos.x;
         ps.position[1] = pos.y;
         gm.SavePlayer();
     }
-
     public void LoadPlayer()
     {
         ps = gm.LoadPlayer();
         pos.x = ps.position[0];
         pos.y = ps.position[1];
     }
-
+    //Respawn
     public void Respawn()
     {
         pos.x = 0; pos.y = 0;
