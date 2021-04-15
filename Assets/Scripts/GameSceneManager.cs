@@ -138,6 +138,7 @@ public class GameSceneManager : MonoBehaviour
     public void ShowRiddle(int category)
     {
         RiddleAnswer.interactable = true;
+        Riddle.SetActive(true);
         if (riddleList[category].riddleComplete)
         {
             RiddleText.text = "Riddle Completed";
@@ -149,8 +150,8 @@ public class GameSceneManager : MonoBehaviour
             riddleList[category].riddleViewed = true;
             currentRiddleAnswers = riddleList[category].RiddleAnswer;
             currentRiddle = category;
+            RiddleAnswer.Select();
         }
-        Riddle.SetActive(true);
     }
     private void RiddleComplete(int riddle)
     {
