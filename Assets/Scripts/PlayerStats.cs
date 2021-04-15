@@ -14,5 +14,5 @@ public class PlayerStats
     public int defenseLevel = 0; //armor, resists damage
     public int purse = 0;
     public List<string> itemList = new List<string>();
-    public bool[] chestCollected = new bool[1];
+    public bool[] chestCollected = new bool[2];
 }

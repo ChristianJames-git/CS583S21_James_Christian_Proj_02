@@ -33,9 +33,13 @@ public class triggerSystem : MonoBehaviour
             //Chests
             case "Chest1":
                 gsm.Chest(0);
+                collision.GetComponent<Collider2D>().enabled = false;
                 break;
             case "Chest2":
                 gsm.Chest(1);
+                collision.GetComponent<Collider2D>().enabled = false;
+                gsm.playerAnim.SetBool("Death", true);
+                gsm.DeathScreen.SetActive(true);
                 break;
             //Riddles
             case "riddle1Chest":
@@ -46,19 +50,19 @@ public class triggerSystem : MonoBehaviour
                 break;
             //Tips
             case "tip1Start":
-                gsm.TipText.text = "After wondering through the forest behind you, you find yourself in this small 'town'. The forest seems to have sealed behind you, resistant to any attempt to leave. The only house has a small sign that simply reads 'Shop' and eerie sounds come from the grate to the west. It's up to you to decide where to go, but for now, back home isn't an option. Good luck";
+                gsm.TipText.text = "Welcome to my little 'town'! The shop is to your right. Hope you like it since you're stuck here as long as I please. Ignore those sounds coming from the grate to the left.";
                 gsm.Tip.SetActive(true);
                 break;
             case "tip2Shop":
-                gsm.TipText.text = "";
+                gsm.TipText.text = "Here's my humble shop. I don't know how you could get injured here, but if you do, that heart will heal you right up";
                 gsm.Tip.SetActive(true);
                 break;
             case "tip3Mine":
-                gsm.TipText.text = "";
+                gsm.TipText.text = "Well it seems you investigated that noise even though I told you not to...though why did I think you'd trust me. I did trap you here. Good think I prepared some riddles for you";
                 gsm.Tip.SetActive(true);
                 break;
             case "tip4Trap":
-                gsm.TipText.text = "";
+                gsm.TipText.text = "Traps do damage or otherwise negatively effect your wellbeing. I've left a few of them around for you. Enjoy :)";
                 gsm.Tip.SetActive(true);
                 break;
         }

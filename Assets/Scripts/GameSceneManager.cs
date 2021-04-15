@@ -14,8 +14,6 @@ public class GameSceneManager : MonoBehaviour
     public Vector3 pos;
     float horizontalMove = 0f;
     float verticalMove = 0f;
-    int facingDir;
-    bool attacking = false;
 
     public GameObject Riddle;
     public TMP_Text RiddleText;
@@ -39,6 +37,8 @@ public class GameSceneManager : MonoBehaviour
     public TMP_Text healthDisplay;
     public TMP_Text purseDisplay;
 
+    public GameObject DeathScreen;
+
     private void Start()
     {
         gm = GameManager.Instance;
@@ -49,7 +49,7 @@ public class GameSceneManager : MonoBehaviour
 
         InstantiateRiddles();
         Riddle.SetActive(false);
-
+        DeathScreen.SetActive(false);
         CreateTraps();
 
         pos.x = 0; pos.y = 0;
@@ -60,19 +60,7 @@ public class GameSceneManager : MonoBehaviour
         pos = transform.position;
         horizontalMove = Input.GetAxisRaw("Horizontal");
         verticalMove = Input.GetAxisRaw("Vertical");
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            playerAnim.SetBool("Attack?", true);
-            attacking = true;
-            playerAnim.SetInteger("AttackDir", facingDir);
-        }
-        if (Input.GetKeyUp(KeyCode.Space))
-        {
-            playerAnim.SetBool("Attack?", false);
-            attacking = false;
-        }
-        if (!attacking)
-            Move(horizontalMove, verticalMove);
+        Move(horizontalMove, verticalMove);
 
         if (Riddle.activeSelf)
             for (int i = 0; i < currentRiddleAnswers.Length; i++)
@@ -86,25 +74,13 @@ public class GameSceneManager : MonoBehaviour
     private void Move(float horizontal, float vertical)
     {
         if (horizontal > 0)
-        {
             pos.x += ps.speed * Time.deltaTime;
-            facingDir = 1;
-        }
         if (horizontal < 0)
-        {
             pos.x -= ps.speed * Time.deltaTime;
-            facingDir = 3;
-        }
         if (vertical > 0)
-        {
             pos.y += ps.speed * Time.deltaTime;
-            facingDir = 0;
-        }
         if (vertical < 0)
-        {
             pos.y -= ps.speed * Time.deltaTime;
-            facingDir = 2;
-        }
         transform.position = pos;
         playerAnim.SetInteger("Horizontal", (int)horizontal);
         playerAnim.SetInteger("Vertical", (int)vertical);
@@ -264,6 +240,16 @@ public class GameSceneManager : MonoBehaviour
         ps = gm.LoadPlayer();
         pos.x = ps.position[0];
         pos.y = ps.position[1];
+    }
+
+    public void Respawn()
+    {
+        pos.x = 0; pos.y = 0;
+        transform.position = pos;
+        DeathScreen.SetActive(false);
+        playerAnim.SetBool("Death", false);
+        LockAll();
+        //Any punishment? Maybe limited deaths
     }
 }
 
