@@ -64,7 +64,8 @@ public class GameSceneManager : MonoBehaviour
         pos = transform.position;
         horizontalMove = Input.GetAxisRaw("Horizontal");
         verticalMove = Input.GetAxisRaw("Vertical");
-        Move(horizontalMove, verticalMove);
+        if (!dead)
+            Move(horizontalMove, verticalMove);
 
         if (Riddle.activeSelf)
             for (int i = 0; i < currentRiddleAnswers.Length; i++)
