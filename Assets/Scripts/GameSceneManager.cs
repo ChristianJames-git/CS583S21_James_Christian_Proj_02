@@ -24,6 +24,9 @@ public class GameSceneManager : MonoBehaviour
     private string[] currentRiddleAnswers;
     private int currentRiddle;
 
+    public GameObject Tip;
+    public TMP_Text TipText;
+
     public List<GameObject> doorList;
     public GameObject door1, door2, door3, door4;
     bool[] doorUnlocked;
