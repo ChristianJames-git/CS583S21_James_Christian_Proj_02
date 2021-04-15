@@ -42,6 +42,8 @@ public class GameSceneManager : MonoBehaviour
     //Death
     public GameObject DeathScreen;
     private bool dead = false;
+    public GameObject tombstone;
+    public Sprite tombstone1, tombstone2, tombstone3;
 
     private void Start()
     {
@@ -231,12 +233,7 @@ public class GameSceneManager : MonoBehaviour
         }
         ps.playerHP -= damage - ps.playerArmor;
         if (ps.playerHP <= 0)
-        {
-            ps.playerHP = 0;
-            playerAnim.SetBool("Death", true);
-            DeathScreen.SetActive(true);
-            dead = true;
-        }
+            Death();
     }
     //Save/Load
     public void SavePlayer()
@@ -251,16 +248,32 @@ public class GameSceneManager : MonoBehaviour
         pos.x = ps.position[0];
         pos.y = ps.position[1];
     }
-    //Respawn
+    //Death
+    private void Death()
+    {
+        ps.playerHP = 0;
+        playerAnim.SetBool("Death", true);
+        DeathScreen.SetActive(true);
+        dead = true;
+    }
     public void Respawn()
     {
+        CreateTombstone(pos.x, pos.y);
         pos.x = 0; pos.y = 0;
         transform.position = pos;
         DeathScreen.SetActive(false);
         playerAnim.SetBool("Death", false);
         dead = false;
+        ps.playerHP = 1;
         LockAll();
         //Any punishment? Maybe limited deaths
+    }
+    private void CreateTombstone(float x, float y)
+    {
+        GameObject newTombstone = Instantiate(tombstone);
+        newTombstone.GetComponent<SpriteRenderer>().sprite = tombstone2;
+        newTombstone.SetActive(true);
+        newTombstone.transform.position = new Vector2(x, y - 0.2f);
     }
 }
 
