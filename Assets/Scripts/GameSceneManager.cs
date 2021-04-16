@@ -28,7 +28,6 @@ public class GameSceneManager : MonoBehaviour
     //Doors
     public List<GameObject> doorList;
     public GameObject door1, door2, door3, door4, door5, door6, door7, door8, door9, door10, door11;
-    bool[] doorUnlocked;
     public Sprite unlockedDoor;
     public Sprite lockedDoor;
     //Traps
@@ -50,8 +49,7 @@ public class GameSceneManager : MonoBehaviour
         gm = GameManager.Instance;
         ps = gm.playerStats;
 
-        doorList.Add(door1); doorList.Add(door2); doorList.Add(door3); doorList.Add(door4);
-        doorUnlocked = new bool[doorList.Count];
+        doorList = new List<GameObject>{ door1, door2, door3, door4, door5, door6, door7, door8, door9, door10, door11};
 
         InstantiateRiddles();
         Riddle.SetActive(false);
@@ -104,7 +102,6 @@ public class GameSceneManager : MonoBehaviour
     {
         for (int i = 0; i < doorList.Count; i++)
         {
-            doorUnlocked[i] = false;
             doorList[i].GetComponent<BoxCollider2D>().enabled = true;
             doorList[i].GetComponent<SpriteRenderer>().sprite = lockedDoor;
         }
@@ -113,7 +110,6 @@ public class GameSceneManager : MonoBehaviour
     }
     private void Unlock(int doorNum)
     {
-        doorUnlocked[doorNum] = true;
         doorList[doorNum].GetComponent<BoxCollider2D>().enabled = false;
         doorList[doorNum].GetComponent<SpriteRenderer>().sprite = unlockedDoor;
     }
@@ -181,7 +177,6 @@ public class GameSceneManager : MonoBehaviour
         //Floor 1 Riddles
         riddleList.Add(new Riddle() { RiddleText = "I follow you all the time and copy your every move, but you can’t touch me or catch me. What am I?", RiddleAnswer = new string[] { "shadow" } });
         riddleList.Add(new Riddle() { RiddleText = "What has many keys but can’t open a single lock?", RiddleAnswer = new string[] { "piano" } });
-        riddleList.Add(new Riddle() { RiddleText = "Where does today come before yesterday?", RiddleAnswer = new string[] { "dictionary" } });
         riddleList.Add(new Riddle() { RiddleText = "What invention lets you look right through a wall?", RiddleAnswer = new string[] { "window" } });
         riddleList.Add(new Riddle() { RiddleText = "If you’re running in a race and you pass the person in second place, what place are you in?", RiddleAnswer = new string[] { "second", "2nd" } });
         riddleList.Add(new Riddle() { RiddleText = "What has to be broken before you can use it?", RiddleAnswer = new string[] { "egg" } });

@@ -59,22 +59,22 @@ public class triggerSystem : MonoBehaviour
                 gsm.ShowRiddle(1);
                 break;
             case "riddle3ToFloor1":
-                gsm.ShowRiddle(2);
+                gsm.ShowRiddle(3);
                 break;
             case "riddle4AtFloor1":
-                //riddle
+                gsm.ShowRiddle(4);
                 break;
             case "riddle5ToChestRoom":
-                //riddle
+                gsm.ShowRiddle(5);
                 break;
             case "riddle6ToChestRoom":
-                //riddle
+                gsm.ShowRiddle(6);
                 break;
             case "riddle7LeftRoom":
-                //riddle
+                gsm.ShowRiddle(7);
                 break;
             case "riddle8ToFloor2":
-                //riddle
+                gsm.ShowRiddle(8);
                 break;
             //Tips
             case "tip1Start":
