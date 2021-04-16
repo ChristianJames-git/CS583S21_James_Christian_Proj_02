@@ -166,6 +166,22 @@ public class GameSceneManager : MonoBehaviour
             case 2:
                 Unlock(4);
                 break;
+            case 3:
+                Unlock(5);
+                Unlock(6);
+                break;
+            case 4:
+                Unlock(7);
+                break;
+            case 5:
+                Unlock(8);
+                break;
+            case 6:
+                Unlock(9);
+                break;
+            case 7:
+                Unlock(10);
+                break;
         }
     }
     public void InstantiateRiddles()

@@ -27,6 +27,9 @@ public class triggerSystem : MonoBehaviour
             case "toFloor1":
                 gsm.Teleport(-25, 28);
                 break;
+            case "backToFloor1":
+                gsm.Teleport(-43.5f, -5.5f);
+                break;
             case "toFloor2":
                 //Location TBD
                 gsm.Teleport(0, 0);
@@ -59,22 +62,22 @@ public class triggerSystem : MonoBehaviour
                 gsm.ShowRiddle(1);
                 break;
             case "riddle3ToFloor1":
-                gsm.ShowRiddle(3);
+                gsm.ShowRiddle(2);
                 break;
             case "riddle4AtFloor1":
-                gsm.ShowRiddle(4);
+                gsm.ShowRiddle(3);
                 break;
             case "riddle5ToChestRoom":
-                gsm.ShowRiddle(5);
+                gsm.ShowRiddle(4);
                 break;
             case "riddle6ToChestRoom":
-                gsm.ShowRiddle(6);
+                gsm.ShowRiddle(5);
                 break;
             case "riddle7LeftRoom":
-                gsm.ShowRiddle(7);
+                gsm.ShowRiddle(6);
                 break;
             case "riddle8ToFloor2":
-                gsm.ShowRiddle(8);
+                gsm.ShowRiddle(7);
                 break;
             //Tips
             case "tip1Start":
