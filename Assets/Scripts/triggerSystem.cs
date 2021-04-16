@@ -50,9 +50,17 @@ public class triggerSystem : MonoBehaviour
                 gsm.Chest(1);
                 collision.GetComponent<Collider2D>().enabled = false;
                 break;
-            case "Chest3":
-                gsm.Chest(2);
-                collision.GetComponent<Collider2D>().enabled = false;
+            case "Chest3A":
+                gsm.ChestPuzzle(0);
+                break;
+            case "Chest3B":
+                gsm.ChestPuzzle(1);
+                break;
+            case "Chest3C":
+                gsm.ChestPuzzle(2);
+                break;
+            case "Chest3D":
+                gsm.ChestPuzzle(3);
                 break;
             //Riddles
             case "riddle1Chest":

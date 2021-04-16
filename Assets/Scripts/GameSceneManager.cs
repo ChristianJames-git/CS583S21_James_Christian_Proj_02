@@ -22,6 +22,7 @@ public class GameSceneManager : MonoBehaviour
     public List<Riddle> riddleList = new List<Riddle>();
     private string[] currentRiddleAnswers;
     private int currentRiddle;
+    private int nextChestRiddle = 0;
     //Tips
     public GameObject Tip;
     public TMP_Text TipText;
@@ -128,6 +129,17 @@ public class GameSceneManager : MonoBehaviour
                     break;
             }
             ps.chestCollected[chestNum] = true;
+        }
+    }
+    public void ChestPuzzle(int chestNum)
+    {
+        if (chestNum == nextChestRiddle)
+            nextChestRiddle++;
+        else
+        {
+            CreateSpikeTrap(-34.5f + Random.Range(0, 2), 14.5f + Random.Range(0, 6));
+            CreateSpikeTrap(-36.5f + Random.Range(0, 6), 16.5f + Random.Range(0, 2));
+            nextChestRiddle = 0;
         }
     }
     //Riddles
