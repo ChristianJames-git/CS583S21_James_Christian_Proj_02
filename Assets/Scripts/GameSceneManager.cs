@@ -27,7 +27,7 @@ public class GameSceneManager : MonoBehaviour
     public TMP_Text TipText;
     //Doors
     public List<GameObject> doorList;
-    public GameObject door1, door2, door3, door4, door5;
+    public GameObject door1, door2, door3, door4, door5, door6, door7, door8, door9, door10, door11;
     bool[] doorUnlocked;
     public Sprite unlockedDoor;
     public Sprite lockedDoor;

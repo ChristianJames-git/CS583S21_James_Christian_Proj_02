@@ -25,8 +25,7 @@ public class triggerSystem : MonoBehaviour
                 gsm.LockAll();
                 break;
             case "toFloor1":
-                //Location TBD
-                gsm.Teleport(0, 0);
+                gsm.Teleport(-25, 28);
                 break;
             case "toFloor2":
                 //Location TBD
@@ -48,6 +47,10 @@ public class triggerSystem : MonoBehaviour
                 gsm.Chest(1);
                 collision.GetComponent<Collider2D>().enabled = false;
                 break;
+            case "Chest3":
+                gsm.Chest(2);
+                collision.GetComponent<Collider2D>().enabled = false;
+                break;
             //Riddles
             case "riddle1Chest":
                 gsm.ShowRiddle(0);
@@ -57,6 +60,21 @@ public class triggerSystem : MonoBehaviour
                 break;
             case "riddle3ToFloor1":
                 gsm.ShowRiddle(2);
+                break;
+            case "riddle4AtFloor1":
+                //riddle
+                break;
+            case "riddle5ToChestRoom":
+                //riddle
+                break;
+            case "riddle6ToChestRoom":
+                //riddle
+                break;
+            case "riddle7LeftRoom":
+                //riddle
+                break;
+            case "riddle8ToFloor2":
+                //riddle
                 break;
             //Tips
             case "tip1Start":
@@ -95,6 +113,11 @@ public class triggerSystem : MonoBehaviour
             case "riddle1Chest":
             case "riddle2Doors":
             case "riddle3ToFloor1":
+            case "riddle4AtFloor1":
+            case "riddle5ToChestRoom":
+            case "riddle6ToChestRoom":
+            case "riddle7LeftRoom":
+            case "riddle8ToFloor2":
                 gsm.Riddle.SetActive(false);
                 gsm.RiddleAnswer.text = "";
                 break;
