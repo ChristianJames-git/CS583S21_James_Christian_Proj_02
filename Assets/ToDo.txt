@@ -1,14 +1,13 @@
 Respawn Punishment/Death Balancing
-Floor 1 Design
+-Floor 1 Design
 Floor 2 Design
-Randomized riddles
+-Randomized riddles
 Chest 2 Reward (maybe achievement or gold or item?)
 Shop Items and Prices
 Spike Immunity Item in shop after beating floor 1 (Tip saying go to shop)
 Fire immunity Item in shop after beating floor 2 (Tip saying go to shop)
 How to Play
-Escape Menu - Load, Save, Exit to Main Menu, (maybe easter egg?)
-Auto selecting text box
+-Escape Menu - Load, Save, Exit to Main Menu, (maybe easter egg?)
 
 Damage Balancing
 Gold Balancing
