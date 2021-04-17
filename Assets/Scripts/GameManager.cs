@@ -52,3 +52,10 @@ public class GameManager : MonoBehaviour
         }
     }
 }
+
+public class Item
+{
+    public int itemID;
+    public string itemName;
+    public int itemCost;
+}

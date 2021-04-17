@@ -13,6 +13,6 @@ public class PlayerStats
     public float speed = 3;
     public int playerArmor = 0; //armor, resists damage
     public int purse = 0;
-    public List<string> itemList = new List<string>();
+    public List<Item> itemList = new List<Item>();
     public bool[] chestCollected = new bool[2];
 }

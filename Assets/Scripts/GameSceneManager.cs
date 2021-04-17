@@ -60,7 +60,6 @@ public class GameSceneManager : MonoBehaviour
         DeathScreen.SetActive(false);
         CreateTraps();
         chestNumRand = Random.Range(0, 4);
-        Debug.Log(chestNumRand);
 
         pos.x = 0; pos.y = 0;
         transform.position = pos;
