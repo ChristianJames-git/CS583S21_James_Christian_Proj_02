@@ -23,6 +23,9 @@ public class GameSceneManager : MonoBehaviour
     private string[] currentRiddleAnswers;
     private int currentRiddle;
     private int nextChestRiddle = 0;
+    private bool chestRiddleComplete = false;
+    public List<GameObject> chestRiddleTraps = new List<GameObject>();
+    private int chestNumRand;
     //Tips
     public GameObject Tip;
     public TMP_Text TipText;
@@ -56,6 +59,8 @@ public class GameSceneManager : MonoBehaviour
         Riddle.SetActive(false);
         DeathScreen.SetActive(false);
         CreateTraps();
+        chestNumRand = Random.Range(0, 4);
+        Debug.Log(chestNumRand);
 
         pos.x = 0; pos.y = 0;
         transform.position = pos;
@@ -108,6 +113,11 @@ public class GameSceneManager : MonoBehaviour
         }
         for (int j = 0; j < riddleList.Count; j++)
             riddleList[j].riddleComplete = false;
+        chestRiddleComplete = false;
+        for (int i = 0; i < chestRiddleTraps.Count; i++)
+            GameObject.Destroy(chestRiddleTraps[i]);
+        chestRiddleTraps.Clear();
+        chestNumRand = Random.Range(0, 4);
     }
     private void Unlock(int doorNum)
     {
@@ -133,13 +143,27 @@ public class GameSceneManager : MonoBehaviour
     }
     public void ChestPuzzle(int chestNum)
     {
-        if (chestNum == nextChestRiddle)
-            nextChestRiddle++;
-        else
+        chestNum = (chestNum + chestNumRand) % 4;
+        Debug.Log(chestNum);
+        if (!chestRiddleComplete)
         {
-            CreateSpikeTrap(-34.5f + Random.Range(0, 2), 14.5f + Random.Range(0, 6));
-            CreateSpikeTrap(-36.5f + Random.Range(0, 6), 16.5f + Random.Range(0, 2));
-            nextChestRiddle = 0;
+            if (chestNum == nextChestRiddle)
+            {
+                if (chestNum == 3)
+                {
+                    ps.purse += 30;
+                    nextChestRiddle = 0;
+                    chestRiddleComplete = true;
+                }
+                else
+                    nextChestRiddle++;
+            }
+            else
+            {
+                chestRiddleTraps.Add(CreateSpikeTrap(-34.5f + Random.Range(0, 2), 14.5f + Random.Range(0, 6)));
+                chestRiddleTraps.Add(CreateSpikeTrap(-36.5f + Random.Range(0, 6), 16.5f + Random.Range(0, 2)));
+                nextChestRiddle = 0;
+            }
         }
     }
     //Riddles
@@ -230,12 +254,13 @@ public class GameSceneManager : MonoBehaviour
         CreateSpikeTrap(-44.5f, 8.5f);
         CreateSpikeTrap(-44.5f, 9.5f);
     }
-    private void CreateSpikeTrap (float x, float y)
+    private GameObject CreateSpikeTrap (float x, float y)
     {
         GameObject newSpikeTrap = Instantiate(spikeTrap);
         newSpikeTrap.name = "Spike";
         newSpikeTrap.SetActive(true);
         newSpikeTrap.transform.position = new Vector2(x, y);
+        return newSpikeTrap;
     }
     private void CreateFireTrap (float x, float y)
     {
