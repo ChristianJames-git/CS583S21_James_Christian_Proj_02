@@ -63792,6 +63792,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uiShop: {fileID: 1983248570}
+  invMan: {fileID: 1525745207}
   player: {fileID: 1971092465}
   playerAnim: {fileID: 1971092466}
   pos: {x: 0, y: 0, z: 0}

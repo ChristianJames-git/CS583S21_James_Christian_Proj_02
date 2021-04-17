@@ -6,33 +6,39 @@ using UnityEngine.UI;
 
 public class InventoryManager : MonoBehaviour
 {
-    private GameManager gm;
+    //private GameManager gm;
+    private PlayerStats ps;
     public List<Transform> itemButtonList = new List<Transform>();
     public Transform ItemTemplate;
     public GameObject potionFloor1;
+    private bool clickedGlasses;
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        gm = GameManager.Instance;
+        ps = GameManager.Instance.playerStats;
         StartItemList();
         ItemTemplate.gameObject.SetActive(false);
-        gameObject.SetActive(true);
+        Hide();
+    }
+    private void Update()
+    {
+        
     }
 
     private void StartItemList()
     {
-        Item shades = new Item { itemID = 10000, itemCost = 0, itemName = "Cool Sunglasses" };
+        Item shades = new Item { itemID = 100, itemCost = 0, itemName = "Cool Sunglasses" };
         AddItem(shades);
     }
     public void AddItem(Item item)
     {
-        gm.playerStats.itemList.Add(item);
+        ps.itemList.Add(item);
         AddItemDisplay(item);
     }
     public void RemoveItem(int index)
     {
-        gm.playerStats.itemList.RemoveAt(index);
+        ps.itemList.RemoveAt(index);
         itemButtonList.RemoveAt(index);
         UpdateItemDisplay();
     }
@@ -40,7 +46,8 @@ public class InventoryManager : MonoBehaviour
     {
         Transform newItem = Instantiate(ItemTemplate, transform);
         RectTransform newItemRectTransform = newItem.GetComponent<RectTransform>();
-        newItemRectTransform.anchoredPosition = new Vector2(0, -30 * itemButtonList.Count);
+        int y = -30 * itemButtonList.Count;
+        newItemRectTransform.anchoredPosition = new Vector2(0, y);
         Transform newItemButton = newItem.GetChild(0);
         newItemButton.GetChild(0).GetComponent<TMP_Text>().text = item.itemName;
         newItemButton.GetChild(1).GetComponent<TMP_Text>().text = item.itemCost.ToString();
@@ -50,18 +57,47 @@ public class InventoryManager : MonoBehaviour
 
         void onClick()
         {
-            onItemClick(item.itemID);
+            OnItemClick(item.itemID, y);
         }
     }
     private void UpdateItemDisplay()
     {
         for (int i = 0; i < itemButtonList.Count; i++)
         {
-            itemButtonList[i].transform.position = new Vector2(150, -15 - 30 * i);
+            itemButtonList[i].GetComponent<RectTransform>().anchoredPosition = new Vector2(150, -30 * i);
         }
     }
-    private void onItemClick(int itemID)
+    private void OnItemClick(int itemID, int y)
     {
-        Debug.Log(itemID);
+        int index = y / -30;
+        switch (itemID)
+        {
+            case 100: //glasses
+                if (!clickedGlasses)
+                {
+                    ps.playerMaxHP++;
+                    clickedGlasses = true;
+                    UpdateItemDisplay();
+                }
+                break;
+            case 001: //potion
+                if (ps.playerHP != ps.playerMaxHP)
+                {
+                    ps.playerHP += 50;
+                    if (ps.playerHP > ps.playerMaxHP)
+                        ps.playerHP = ps.playerMaxHP;
+                    RemoveItem(index);
+                }
+                break;
+        }
+    }
+
+    public void Show()
+    {
+        gameObject.SetActive(true);
+    }
+    public void Hide()
+    {
+        gameObject.SetActive(false);
     }
 }

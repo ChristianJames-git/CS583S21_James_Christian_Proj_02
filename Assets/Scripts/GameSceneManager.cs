@@ -9,6 +9,7 @@ public class GameSceneManager : MonoBehaviour
     private GameManager gm;
     private PlayerStats ps;
     [SerializeField] private UI_Shop uiShop;
+    [SerializeField] private InventoryManager invMan;
     //Player and Movement
     public GameObject player;
     public Animator playerAnim;
@@ -79,6 +80,15 @@ public class GameSceneManager : MonoBehaviour
 
         healthDisplay.text = ps.playerHP + " / " + ps.playerMaxHP;
         purseDisplay.text = "" + ps.purse;
+
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            Debug.Log("Tab");
+            if (invMan.gameObject.activeSelf)
+                invMan.Hide();
+            else
+                invMan.Show();
+        }
     }
 
     //Movements
