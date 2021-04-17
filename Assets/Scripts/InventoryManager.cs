@@ -6,12 +6,13 @@ using UnityEngine.UI;
 
 public class InventoryManager : MonoBehaviour
 {
-    //private GameManager gm;
     private PlayerStats ps;
     public List<Transform> itemButtonList = new List<Transform>();
     public Transform ItemTemplate;
-    public GameObject potionFloor1;
     private bool clickedGlasses;
+    private int potionBoost = 50;
+    public float spikeDamageMult = 1;
+    public float fireDamageMult = 1;
 
     // Start is called before the first frame update
     private void Start()
@@ -20,10 +21,6 @@ public class InventoryManager : MonoBehaviour
         StartItemList();
         ItemTemplate.gameObject.SetActive(false);
         Hide();
-    }
-    private void Update()
-    {
-        
     }
 
     private void StartItemList()
@@ -36,9 +33,10 @@ public class InventoryManager : MonoBehaviour
         ps.itemList.Add(item);
         AddItemDisplay(item);
     }
-    public void RemoveItem(int index)
+    private void RemoveItem(int index)
     {
         ps.itemList.RemoveAt(index);
+        Destroy(itemButtonList[index].gameObject);
         itemButtonList.RemoveAt(index);
         UpdateItemDisplay();
     }
@@ -51,6 +49,7 @@ public class InventoryManager : MonoBehaviour
         Transform newItemButton = newItem.GetChild(0);
         newItemButton.GetChild(0).GetComponent<TMP_Text>().text = item.itemName;
         newItemButton.GetChild(1).GetComponent<TMP_Text>().text = item.itemCost.ToString();
+        newItem.gameObject.SetActive(true);
         itemButtonList.Add(newItem);
 
         newItemButton.GetComponent<Button>().onClick.AddListener(onClick);
@@ -63,13 +62,12 @@ public class InventoryManager : MonoBehaviour
     private void UpdateItemDisplay()
     {
         for (int i = 0; i < itemButtonList.Count; i++)
-        {
-            itemButtonList[i].GetComponent<RectTransform>().anchoredPosition = new Vector2(150, -30 * i);
-        }
+            itemButtonList[i].GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -30 * i);
     }
     private void OnItemClick(int itemID, int y)
     {
         int index = y / -30;
+        Debug.Log(index);
         switch (itemID)
         {
             case 100: //glasses
@@ -77,17 +75,22 @@ public class InventoryManager : MonoBehaviour
                 {
                     ps.playerMaxHP++;
                     clickedGlasses = true;
-                    UpdateItemDisplay();
                 }
                 break;
             case 001: //potion
                 if (ps.playerHP != ps.playerMaxHP)
                 {
-                    ps.playerHP += 50;
+                    ps.playerHP += potionBoost;
                     if (ps.playerHP > ps.playerMaxHP)
                         ps.playerHP = ps.playerMaxHP;
                     RemoveItem(index);
                 }
+                break;
+            case 002: //Spike Res
+                spikeDamageMult = 0.2f;
+                break;
+            case 003: //Fire Res
+                fireDamageMult = 0.2f;
                 break;
         }
     }

@@ -6,6 +6,15 @@ public class triggerSystem : MonoBehaviour
 {
     [SerializeField] private GameSceneManager gsm;
     [SerializeField] private UI_Shop uishop;
+    [SerializeField] private InventoryManager invMan;
+    private Item potion;
+    private Item spikeRes;
+    private Item fireRes;
+
+    private void Start()
+    {
+        potion = new Item { itemCost = 25, itemID = 001, itemName = "Potion" };
+    }
     public void OnTriggerEnter2D(Collider2D collision)
     {
         switch (collision.name)
@@ -110,6 +119,11 @@ public class triggerSystem : MonoBehaviour
                 break;
             case "Fire":
                 gsm.TrapDamage(1);
+                break;
+            //Items
+            case "Potion":
+                collision.gameObject.SetActive(false);
+                invMan.AddItem(potion);
                 break;
         }
     }

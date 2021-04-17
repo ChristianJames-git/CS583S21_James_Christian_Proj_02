@@ -63839,6 +63839,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gsm: {fileID: 1971092470}
   uishop: {fileID: 1983248570}
+  invMan: {fileID: 1525745207}
 --- !u!58 &1971092473
 CircleCollider2D:
   m_ObjectHideFlags: 0

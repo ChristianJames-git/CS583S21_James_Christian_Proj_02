@@ -83,7 +83,6 @@ public class GameSceneManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Tab))
         {
-            Debug.Log("Tab");
             if (invMan.gameObject.activeSelf)
                 invMan.Hide();
             else
@@ -283,10 +282,10 @@ public class GameSceneManager : MonoBehaviour
         switch (damage)
         {
             case 0:
-                damage = spikeDamage;
+                damage = (int)(spikeDamage * invMan.spikeDamageMult);
                 break;
             case 1:
-                damage = fireDamage;
+                damage = (int)(fireDamage * invMan.fireDamageMult);
                 break;
         }
         ps.playerHP -= damage - ps.playerArmor;
