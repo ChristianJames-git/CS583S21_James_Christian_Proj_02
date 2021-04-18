@@ -48,7 +48,7 @@ public class InventoryManager : MonoBehaviour
         newItemRectTransform.anchoredPosition = new Vector2(0, y);
         Transform newItemButton = newItem.GetChild(0);
         newItemButton.GetChild(0).GetComponent<TMP_Text>().text = item.itemName;
-        newItemButton.GetChild(1).GetComponent<TMP_Text>().text = item.itemCost.ToString();
+        newItemButton.GetChild(1).gameObject.SetActive(false);
         newItem.gameObject.SetActive(true);
         itemButtonList.Add(newItem);
 

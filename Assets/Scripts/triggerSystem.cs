@@ -5,7 +5,7 @@ using UnityEngine;
 public class triggerSystem : MonoBehaviour
 {
     [SerializeField] private GameSceneManager gsm;
-    [SerializeField] private UI_Shop uishop;
+    [SerializeField] private UI_Shop uiShop;
     [SerializeField] private InventoryManager invMan;
     private Item potion;
     private Item spikeRes;
@@ -42,10 +42,15 @@ public class triggerSystem : MonoBehaviour
             case "toFloor2":
                 //Location TBD
                 gsm.Teleport(0, 0);
+                uiShop.AddButton("Spike Resistance Talisman", uiShop.spikeResCost, 002, 4);
+                break;
+            case "LeaveFloor2":
+                gsm.Teleport(0, 0);
+                uiShop.AddButton("Fire Resistance Talisman", uiShop.fireResCost, 003, 5);
                 break;
             //Shop
             case "shopArea":
-                uishop.Show();
+                uiShop.Show();
                 break;
             case "healArea":
                 GameManager.Instance.playerStats.playerHP = GameManager.Instance.playerStats.playerMaxHP;
@@ -133,7 +138,7 @@ public class triggerSystem : MonoBehaviour
         switch (collision.name)
         {
             case "shopArea":
-                uishop.Hide();
+                uiShop.Hide();
                 break;
             case "riddle1Chest":
             case "riddle2Doors":

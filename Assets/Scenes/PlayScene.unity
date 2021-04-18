@@ -12575,7 +12575,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemButtonList: []
   ItemTemplate: {fileID: 939333859}
-  potionFloor1: {fileID: 1437252291}
+  spikeDamageMult: 1
+  fireDamageMult: 1
 --- !u!114 &1525745208
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -63838,7 +63839,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gsm: {fileID: 1971092470}
-  uishop: {fileID: 1983248570}
+  uiShop: {fileID: 1983248570}
   invMan: {fileID: 1525745207}
 --- !u!58 &1971092473
 CircleCollider2D:
@@ -63941,8 +63942,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8852fdf3d4e3a9745a4683074e7c603c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  invMan: {fileID: 0}
   container: {fileID: 785878164}
   shopItemTemplate: {fileID: 1950952007}
+  spikeResCost: 50
+  fireResCost: 50
 --- !u!1 &1984648346
 GameObject:
   m_ObjectHideFlags: 0

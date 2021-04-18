@@ -6,28 +6,36 @@ using UnityEngine.UI;
 
 public class UI_Shop : MonoBehaviour
 {
+    private PlayerStats ps;
+    [SerializeField] private InventoryManager invMan;
     public Transform container;
     public Transform shopItemTemplate;
-
-    private void Awake()
-    {
-        //container = transform.Find("container");
-        //shopItemTemplate = container.Find("shopItemTemplate");
-    }
+    private int healthCost = 25;
+    private int armorCost = 25;
+    private int potionCost = 20;
+    private int speedCost = 25;
+    public int spikeResCost = 50;
+    public int fireResCost = 50;
+    private Transform[] tempButtons = new Transform[2];
 
     private void Start()
     {
-        CreateButtons("Armor", 100, 0);
-        CreateButtons("Mining", 75, 1);
-        CreateButtons("Damage", 150, 2);
-        CreateButtons("Speed", 200, 3);
-        CreateButtons("Potion", 25, 4);
-        CreateButtons("Difficulty Upgrade", 10000, 5);
+        ps = GameManager.Instance.playerStats;
+        AddButton("Health +10", healthCost, 4, 0);
+        AddButton("Armor +2", armorCost, 5, 1);
+        AddButton("Potion", potionCost, 001, 2);
+        AddButton("Speed", speedCost, 6, 3);
 
         Hide();
     }
 
-    private void CreateButtons (string itemName, int itemPrice, int positionIndex)
+    public void AddButton(string iName, int iCost, int iID, int positionIndex)
+    {
+        Item newItem = new Item() { itemCost = iCost, itemName = iName, itemID = iID };
+        CreateButton(newItem, positionIndex);
+    }
+
+    private void CreateButton (Item item, int positionIndex)
     {
         Transform shopItemTransform = Instantiate(shopItemTemplate, container);
         shopItemTemplate.gameObject.SetActive(true);
@@ -36,13 +44,29 @@ public class UI_Shop : MonoBehaviour
         float shopItemHeight = 50f;
         shopItemRectTransform.anchoredPosition = new Vector2(0, -shopItemHeight * positionIndex);
 
-        shopItemTransform.Find("itemName").GetComponent<TextMeshProUGUI>().SetText(itemName);
-        shopItemTransform.Find("itemPrice").GetComponent<TextMeshProUGUI>().SetText(itemPrice.ToString());
-        shopItemTransform.GetComponent<Button>().onClick.AddListener(test);
-        void test()
+        shopItemTransform.Find("itemName").GetComponent<TextMeshProUGUI>().SetText(item.itemName);
+        shopItemTransform.Find("itemPrice").GetComponent<TextMeshProUGUI>().SetText(item.itemCost.ToString());
+        shopItemTransform.GetComponent<Button>().onClick.AddListener(onClick);
+
+        if (item.itemID == 002 || item.itemID == 003)
+            tempButtons[item.itemID - 2] = shopItemTransform;
+        void onClick()
         {
-            Debug.Log("Hello " + itemName);
+            BuyItem(item);
         }
+    }
+
+    private void BuyItem(Item item)
+    {
+        if (item.itemCost <= ps.purse)
+        {
+            ps.purse -= item.itemCost;
+            invMan.AddItem(item);
+            ps.shopPurchases[item.itemID - 1]++;
+            item.itemCost = (int)(item.itemCost * 1.5f);
+        }
+        if (item.itemID == 002 || item.itemID == 003)
+            Destroy(tempButtons[item.itemID - 2]);
     }
 
     public void Show()
