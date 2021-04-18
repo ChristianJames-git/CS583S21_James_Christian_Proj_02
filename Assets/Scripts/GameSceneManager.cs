@@ -270,27 +270,29 @@ public class GameSceneManager : MonoBehaviour
         newSpikeTrap.transform.position = new Vector2(x, y);
         return newSpikeTrap;
     }
-    private void CreateFireTrap (float x, float y)
+    private GameObject CreateFireTrap (float x, float y)
     {
         GameObject newFireTrap = Instantiate(fireTrap);
         newFireTrap.name = "Fire";
         newFireTrap.SetActive(true);
         newFireTrap.transform.position = new Vector2(x, y);
+        return newFireTrap;
     }
     public void TrapDamage(int damage)
     {
-        switch (damage)
+        switch (damage) //Apply Res Items
         {
             case 0:
                 damage = (int)(spikeDamage * invMan.spikeDamageMult);
-                Debug.Log(damage);
                 break;
             case 1:
                 damage = (int)(fireDamage * invMan.fireDamageMult);
                 break;
         }
-        ps.playerHP -= damage - ps.playerArmor;
-        if (ps.playerHP <= 0)
+        damage -= ps.playerArmor; //Apply Armor
+        if (damage > 0)
+            ps.playerHP -= damage;
+        if (ps.playerHP <= 0) //Die
             Death();
     }
     //Save/Load
@@ -324,7 +326,7 @@ public class GameSceneManager : MonoBehaviour
         dead = false;
         ps.playerHP = 1;
         LockAll();
-        //Any punishment? Maybe limited deaths
+        ps.purse /= 2;
     }
     private void CreateTombstone(float x, float y)
     {
