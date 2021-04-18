@@ -16,15 +16,15 @@ public class UI_Shop : MonoBehaviour
     private int speedCost = 25;
     public int spikeResCost = 50;
     public int fireResCost = 50;
-    private Transform[] tempButtons = new Transform[2];
+    private List<Transform> buttonList = new List<Transform>();
 
     private void Start()
     {
         ps = GameManager.Instance.playerStats;
-        AddButton("Health +10", healthCost, 4, 0);
-        AddButton("Armor +2", armorCost, 5, 1);
-        AddButton("Potion", potionCost, 001, 2);
-        AddButton("Speed", speedCost, 6, 3);
+        AddButton("Potion", potionCost, 001, 0);
+        AddButton("Health +10", healthCost, 2, 1);
+        AddButton("Armor +2", armorCost, 3, 2);
+        AddButton("Speed", speedCost, 4, 3);
 
         Hide();
     }
@@ -48,8 +48,7 @@ public class UI_Shop : MonoBehaviour
         shopItemTransform.Find("itemPrice").GetComponent<TextMeshProUGUI>().SetText(item.itemCost.ToString());
         shopItemTransform.GetComponent<Button>().onClick.AddListener(onClick);
 
-        if (item.itemID == 002 || item.itemID == 003)
-            tempButtons[item.itemID - 2] = shopItemTransform;
+        buttonList.Add(shopItemTransform);
         void onClick()
         {
             BuyItem(item);
@@ -61,12 +60,32 @@ public class UI_Shop : MonoBehaviour
         if (item.itemCost <= ps.purse)
         {
             ps.purse -= item.itemCost;
-            invMan.AddItem(item);
             ps.shopPurchases[item.itemID - 1]++;
-            item.itemCost = (int)(item.itemCost * 1.5f);
+            item.itemCost += 15;
+            buttonList[item.itemID - 1].Find("itemPrice").GetComponent<TextMeshProUGUI>().SetText(item.itemCost.ToString());
+            switch (item.itemID)
+            {
+                case 001:
+                    invMan.AddItem(item);
+                    break;
+                case 002:
+                    ps.playerMaxHP += 10;
+                    break;
+                case 003:
+                    ps.playerArmor += 2;
+                    break;
+                case 004:
+                    ps.speed++;
+                    break;
+                case 005:
+                case 006:
+                    invMan.AddItem(item);
+                    Destroy(buttonList[item.itemID - 1]);
+                    buttonList.RemoveAt(item.itemID - 1);
+                    break;
+            }
+            
         }
-        if (item.itemID == 002 || item.itemID == 003)
-            Destroy(tempButtons[item.itemID - 2]);
     }
 
     public void Show()

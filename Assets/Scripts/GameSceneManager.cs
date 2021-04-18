@@ -73,7 +73,7 @@ public class GameSceneManager : MonoBehaviour
         if (!dead)
             Move(horizontalMove, verticalMove);
 
-        if (Riddle.activeSelf)
+        if (Riddle.activeSelf && !riddleList[currentRiddle].riddleComplete)
             for (int i = 0; i < currentRiddleAnswers.Length; i++)
                 if (RiddleAnswer.text.ToLower() == currentRiddleAnswers[i])
                     RiddleComplete(currentRiddle);
@@ -152,7 +152,6 @@ public class GameSceneManager : MonoBehaviour
     public void ChestPuzzle(int chestNum)
     {
         chestNum = (chestNum + chestNumRand) % 4;
-        Debug.Log(chestNum);
         if (!chestRiddleComplete)
         {
             if (chestNum == nextChestRiddle)
@@ -197,6 +196,7 @@ public class GameSceneManager : MonoBehaviour
     {
         riddleList[currentRiddle].riddleComplete = true;
         RiddleText.text = "Correct! :)";
+        ps.purse += 10;
         switch (riddle)
         {
             case 0:

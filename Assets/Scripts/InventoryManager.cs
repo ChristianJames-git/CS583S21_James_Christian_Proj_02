@@ -67,7 +67,6 @@ public class InventoryManager : MonoBehaviour
     private void OnItemClick(int itemID, int y)
     {
         int index = y / -30;
-        Debug.Log(index);
         switch (itemID)
         {
             case 100: //glasses

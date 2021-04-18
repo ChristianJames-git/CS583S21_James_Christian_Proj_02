@@ -42,11 +42,11 @@ public class triggerSystem : MonoBehaviour
             case "toFloor2":
                 //Location TBD
                 gsm.Teleport(0, 0);
-                uiShop.AddButton("Spike Resistance Talisman", uiShop.spikeResCost, 002, 4);
+                uiShop.AddButton("Spike Resistance Talisman", uiShop.spikeResCost, 005, 4);
                 break;
             case "LeaveFloor2":
                 gsm.Teleport(0, 0);
-                uiShop.AddButton("Fire Resistance Talisman", uiShop.fireResCost, 003, 5);
+                uiShop.AddButton("Fire Resistance Talisman", uiShop.fireResCost, 006, 5);
                 break;
             //Shop
             case "shopArea":
