@@ -40,6 +40,7 @@ public class GameSceneManager : MonoBehaviour
     private int spikeDamage = 40;
     public GameObject fireTrap;
     private int fireDamage = 60;
+    private int bearTrapDamage = 25;
     //HUD
     public TMP_Text healthDisplay;
     public TMP_Text purseDisplay;
@@ -267,6 +268,13 @@ public class GameSceneManager : MonoBehaviour
         CreateFireTrap(43.5f, 26.5f);
         CreateFireTrap(42.5f, 28.5f);
         CreateFireTrap(42.5f, 28.5f);
+        CreateFireTrap(42.5f, 30.5f);
+        CreateSpikeTrap(26.5f, 35.5f);
+        CreateFireTrap(20.5f, 29.5f);
+        CreateFireTrap(17.5f, 33.5f);
+        CreateFireTrap(8.5f, 32.5f);
+        CreateSpikeTrap(8.5f, 29.5f);
+        CreateFireTrap(8.5f, 26.5f);
     }
     private GameObject CreateSpikeTrap (float x, float y)
     {
@@ -293,6 +301,9 @@ public class GameSceneManager : MonoBehaviour
                 break;
             case 1:
                 damage = (int)(fireDamage * invMan.fireDamageMult);
+                break;
+            case 2:
+                damage = bearTrapDamage;
                 break;
         }
         damage -= ps.playerArmor; //Apply Armor

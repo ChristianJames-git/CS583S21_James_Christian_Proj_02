@@ -8,12 +8,12 @@ public class triggerSystem : MonoBehaviour
     [SerializeField] private UI_Shop uiShop;
     [SerializeField] private InventoryManager invMan;
     private Item potion;
-    private Item spikeRes;
-    private Item fireRes;
+    private Item dashRing;
 
     private void Start()
     {
         potion = new Item { itemCost = 25, itemID = 001, itemName = "Potion" };
+        dashRing = new Item { itemCost = 0, itemID = 007, itemName = "Dash Ring" };
     }
     public void OnTriggerEnter2D(Collider2D collision)
     {
@@ -128,6 +128,9 @@ public class triggerSystem : MonoBehaviour
             case "Fire":
                 gsm.TrapDamage(1);
                 break;
+            case "BearTrap":
+                gsm.TrapDamage(2);
+                break;
             case "PushRight":
             case "PushDown":
                 gsm.Teleport(45.5f, 15.5f);
@@ -136,6 +139,10 @@ public class triggerSystem : MonoBehaviour
             case "Potion":
                 collision.gameObject.SetActive(false);
                 invMan.AddItem(potion);
+                break;
+            case "DashRing":
+                collision.gameObject.SetActive(false);
+                invMan.AddItem(dashRing);
                 break;
         }
     }
