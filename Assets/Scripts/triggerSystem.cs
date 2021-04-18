@@ -39,6 +39,9 @@ public class triggerSystem : MonoBehaviour
             case "backToFloor1":
                 gsm.Teleport(-43.5f, -5.5f);
                 break;
+            case "PrisonTeleporters":
+                gsm.Teleport(45.5f, 15.5f);
+                break;
             case "toFloor2":
                 //Location TBD
                 gsm.Teleport(0, 0);
@@ -124,6 +127,10 @@ public class triggerSystem : MonoBehaviour
                 break;
             case "Fire":
                 gsm.TrapDamage(1);
+                break;
+            case "PushRight":
+            case "PushDown":
+                gsm.Teleport(45.5f, 15.5f);
                 break;
             //Items
             case "Potion":

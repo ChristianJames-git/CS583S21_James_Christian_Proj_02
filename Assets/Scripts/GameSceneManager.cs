@@ -261,6 +261,12 @@ public class GameSceneManager : MonoBehaviour
         CreateSpikeTrap(-44.5f, 7.5f);
         CreateSpikeTrap(-44.5f, 8.5f);
         CreateSpikeTrap(-44.5f, 9.5f);
+        //Floor 2
+        CreateFireTrap(42.5f, 23.5f);
+        CreateFireTrap(43.5f, 25.5f);
+        CreateFireTrap(43.5f, 26.5f);
+        CreateFireTrap(42.5f, 28.5f);
+        CreateFireTrap(42.5f, 28.5f);
     }
     private GameObject CreateSpikeTrap (float x, float y)
     {
