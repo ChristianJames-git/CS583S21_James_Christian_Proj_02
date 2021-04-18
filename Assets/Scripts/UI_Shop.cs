@@ -23,8 +23,8 @@ public class UI_Shop : MonoBehaviour
         ps = GameManager.Instance.playerStats;
         AddButton("Potion", potionCost, 001, 0);
         AddButton("Health +10", healthCost, 2, 1);
-        AddButton("Armor +2", armorCost, 3, 2);
-        AddButton("Speed", speedCost, 4, 3);
+        AddButton("Armor +4", armorCost, 3, 2);
+        AddButton("Speed+", speedCost, 4, 3);
 
         Hide();
     }
@@ -72,15 +72,15 @@ public class UI_Shop : MonoBehaviour
                     ps.playerMaxHP += 10;
                     break;
                 case 003:
-                    ps.playerArmor += 2;
+                    ps.playerArmor += 4;
                     break;
                 case 004:
-                    ps.speed++;
+                    ps.speed += 2;
                     break;
                 case 005:
                 case 006:
                     invMan.AddItem(item);
-                    Destroy(buttonList[item.itemID - 1]);
+                    Destroy(buttonList[item.itemID - 1].gameObject);
                     buttonList.RemoveAt(item.itemID - 1);
                     break;
             }

@@ -10,7 +10,7 @@ public class PlayerStats
     public float[] position = { 0, 0, 0 };
     public float playerHP = 100;
     public int playerMaxHP = 100;
-    public float speed = 3;
+    public float speed = 5;
     public int playerArmor = 0; //armor, resists damage
     public int purse = 0;
     public List<Item> itemList = new List<Item>();

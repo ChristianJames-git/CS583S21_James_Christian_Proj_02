@@ -85,10 +85,10 @@ public class InventoryManager : MonoBehaviour
                     RemoveItem(index);
                 }
                 break;
-            case 002: //Spike Res
+            case 005: //Spike Res
                 spikeDamageMult = 0.2f;
                 break;
-            case 003: //Fire Res
+            case 006: //Fire Res
                 fireDamageMult = 0.2f;
                 break;
         }

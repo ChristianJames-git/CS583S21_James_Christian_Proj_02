@@ -283,6 +283,7 @@ public class GameSceneManager : MonoBehaviour
         {
             case 0:
                 damage = (int)(spikeDamage * invMan.spikeDamageMult);
+                Debug.Log(damage);
                 break;
             case 1:
                 damage = (int)(fireDamage * invMan.fireDamageMult);
