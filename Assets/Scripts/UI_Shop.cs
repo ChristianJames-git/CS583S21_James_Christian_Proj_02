@@ -14,8 +14,8 @@ public class UI_Shop : MonoBehaviour
     private int armorCost = 25;
     private int potionCost = 20;
     private int speedCost = 25;
-    public int spikeResCost = 50;
-    public int fireResCost = 50;
+    public int spikeResCost = 0;
+    public int fireResCost = 0;
     private List<Transform> buttonList = new List<Transform>();
 
     private void Start()

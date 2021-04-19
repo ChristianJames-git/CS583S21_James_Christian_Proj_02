@@ -8,12 +8,12 @@ public class triggerSystem : MonoBehaviour
     [SerializeField] private UI_Shop uiShop;
     [SerializeField] private InventoryManager invMan;
     private Item potion;
-    private Item dashRing;
+    private Item fireRing;
 
     private void Start()
     {
         potion = new Item { itemCost = 25, itemID = 001, itemName = "Potion" };
-        dashRing = new Item { itemCost = 0, itemID = 007, itemName = "Dash Ring" };
+        fireRing = new Item { itemCost = 0, itemID = 006, itemName = "Fire Resistance Talisman" };
     }
     public void OnTriggerEnter2D(Collider2D collision)
     {
@@ -121,6 +121,22 @@ public class triggerSystem : MonoBehaviour
                 gsm.TipText.text = "Traps do damage or otherwise negatively effect your wellbeing. I've left a few of them around for you. Enjoy :)";
                 gsm.Tip.SetActive(true);
                 break;
+            case "tip5Puzzle":
+                gsm.TipText.text = "Good luck with this puzzle. Think Z's and you might survive";
+                gsm.Tip.SetActive(true);
+                break;
+            case "tip6Teleporters":
+                gsm.TipText.text = "I'd avoid the purple if I were you. Prison is never a fun place to go. Also a ring in shop may help with the puzzle from the last level";
+                gsm.Tip.SetActive(true);
+                break;
+            case "tip7Prison":
+                gsm.TipText.text = "You didn't listen did you. Have fun getting out of here. That trap is there for an easy escape";
+                gsm.Tip.SetActive(true);
+                break;
+            case "tip8Ring":
+                gsm.TipText.text = "You seem to be close to beating my dungeon. Here's my ring of fire resistance if you want it";
+                gsm.Tip.SetActive(true);
+                break;
             //Traps
             case "Spike":
                 gsm.TrapDamage(0);
@@ -131,18 +147,14 @@ public class triggerSystem : MonoBehaviour
             case "BearTrap":
                 gsm.TrapDamage(2);
                 break;
-            case "PushRight":
-            case "PushDown":
-                gsm.Teleport(45.5f, 15.5f);
-                break;
             //Items
             case "Potion":
                 collision.gameObject.SetActive(false);
                 invMan.AddItem(potion);
                 break;
-            case "DashRing":
+            case "FireRing":
                 collision.gameObject.SetActive(false);
-                invMan.AddItem(dashRing);
+                invMan.AddItem(fireRing);
                 break;
         }
     }
