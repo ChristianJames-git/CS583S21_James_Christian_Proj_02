@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class triggerSystem : MonoBehaviour
 {
@@ -52,6 +53,9 @@ public class triggerSystem : MonoBehaviour
                 break;
             case "backToFloor2":
                 gsm.Teleport(8.5f, 41f);
+                break;
+            case "toEnd":
+                SceneManager.LoadScene("Credits");
                 break;
             //Shop
             case "shopArea":
@@ -155,6 +159,11 @@ public class triggerSystem : MonoBehaviour
                 gsm.TipText.text = "You seem to be close to beating my dungeon. Here's my ring of fire resistance if you want it";
                 gsm.Tip.SetActive(true);
                 break;
+            case "tip9End":
+                gsm.TipText.text = "You did it! I didn't think you would but people continue to surprise me. Hope you enjoyed my small town, now go return to yours with your loot. Here's some extra cash too";
+                GameManager.Instance.playerStats.purse += 50;
+                gsm.Tip.SetActive(true);
+                break;
             //Traps
             case "Spike":
                 gsm.TrapDamage(0);
@@ -213,6 +222,7 @@ public class triggerSystem : MonoBehaviour
             case "tip6Teleporters":
             case "tip7Prison":
             case "tip8Ring":
+            case "tip9End":
                 gsm.Tip.SetActive(false);
                 break;
         }
