@@ -36,11 +36,11 @@ public class InventoryManager : MonoBehaviour
     {
         shades = new Item { itemName = "Cool Sunglasses", itemCost = 0, itemID = 0 };
         AddItem(shades);
-        potion = new Item { itemName = "Potion", itemCost = 25, itemID = 1 };
+        potion = new Item { itemName = "Potion", itemCost = 20, itemID = 1 };
         healthUp = new Item { itemName = "Health +10", itemCost = 25, itemID = 2 };
         armorUp = new Item { itemName = "Armor +2", itemCost = 25, itemID = 3 };
         speedUp = new Item { itemName = "Speed+", itemCost = 25, itemID = 4 };
-        riddleAns = new Item { itemName = "Riddle Answer", itemCost = 25, itemID = 5 };
+        riddleAns = new Item { itemName = "Riddle Answer", itemCost = 30, itemID = 5 };
         spikeRing = new Item { itemName = "Spike Resistance Ring", itemCost = 50, itemID = 6 };
         fireRing = new Item { itemName = "Fire Resistance Ring", itemCost = 75, itemID = 7 };
         gem = new Item { itemName = "Gemstone", itemCost = 100, itemID = 8 };

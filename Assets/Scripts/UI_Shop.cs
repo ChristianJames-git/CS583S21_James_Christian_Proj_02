@@ -49,6 +49,8 @@ public class UI_Shop : MonoBehaviour
         {
             ps.purse -= item.itemCost;
             ps.shopPurchases[item.itemID - 1]++;
+            item.itemCost += 15;
+            buttonList[item.itemID - 1].Find("itemPrice").GetComponent<TextMeshProUGUI>().SetText(item.itemCost.ToString());
             switch (item.itemID)
             {
                 case 001:
@@ -70,8 +72,6 @@ public class UI_Shop : MonoBehaviour
                     buttonList.RemoveAt(5);
                     break;
             }
-            item.itemCost += 15;
-            buttonList[item.itemID - 1].Find("itemPrice").GetComponent<TextMeshProUGUI>().SetText(item.itemCost.ToString());
         }
     }
 
