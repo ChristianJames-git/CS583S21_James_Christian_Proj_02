@@ -193,6 +193,7 @@ public class GameSceneManager : MonoBehaviour
             currentRiddleAnswers = riddleList[category].RiddleAnswer;
             currentRiddle = category;
             RiddleAnswer.Select();
+            RiddleAnswer.ActivateInputField();
         }
     }
     private void RiddleComplete(int riddle)
