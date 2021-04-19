@@ -32,7 +32,7 @@ public class GameSceneManager : MonoBehaviour
     public TMP_Text TipText;
     //Doors
     public List<GameObject> doorList;
-    public GameObject door1, door2, door3, door4, door5, door6, door7, door8, door9, door10, door11;
+    public GameObject door1, door2, door3, door4, door5, door6, door7, door8, door9, door10, door11, door12, door13, door14, door15, door16;
     public Sprite unlockedDoor;
     public Sprite lockedDoor;
     //Traps
@@ -55,7 +55,7 @@ public class GameSceneManager : MonoBehaviour
         gm = GameManager.Instance;
         ps = gm.playerStats;
 
-        doorList = new List<GameObject>{ door1, door2, door3, door4, door5, door6, door7, door8, door9, door10, door11};
+        doorList = new List<GameObject>{ door1, door2, door3, door4, door5, door6, door7, door8, door9, door10, door11, door12, door13, door14, door15, door16 };
 
         InstantiateRiddles();
         Riddle.SetActive(false);
@@ -216,16 +216,15 @@ public class GameSceneManager : MonoBehaviour
                 Unlock(6);
                 break;
             case 4:
-                Unlock(7);
-                break;
             case 5:
-                Unlock(8);
-                break;
             case 6:
-                Unlock(9);
-                break;
             case 7:
-                Unlock(10);
+            case 8:
+            case 9:
+            case 10:
+            case 11:
+            case 12:
+                Unlock(riddle+3);
                 break;
         }
     }
@@ -247,15 +246,10 @@ public class GameSceneManager : MonoBehaviour
         riddleList.Add(new Riddle() { RiddleText = "What has to be broken before you can use it?", RiddleAnswer = new string[] { "egg" } });
         //Floor 2 Riddles
         riddleList.Add(new Riddle() { RiddleText = "What has a head and a tail but no body?", RiddleAnswer = new string[] { "coin", "penny", "nickle", "dime", "quarter" } });
+        riddleList.Add(new Riddle() { RiddleText = "Did you enjoy your stay in prison?", RiddleAnswer = new string[] { "yes", "no", "fuck you", "screw off" } });
         riddleList.Add(new Riddle() { RiddleText = "It stalks the countryside with ears that can’t hear. What is it?", RiddleAnswer = new string[] { "corn" } });
-        riddleList.Add(new Riddle() { RiddleText = "What kind of coat is best put on wet?", RiddleAnswer = new string[] { "paint" } });
         riddleList.Add(new Riddle() { RiddleText = "I am an odd number. Take away a letter and I become even. What number am I?", RiddleAnswer = new string[] { "seven", "7" } });
         riddleList.Add(new Riddle() { RiddleText = "Mary has four daughters, and each of her daughters has a brother. How many children does Mary have?", RiddleAnswer = new string[] { "five", "5" } });
-        riddleList.Add(new Riddle() { RiddleText = "What five-letter word becomes shorter when you add two letters to it?", RiddleAnswer = new string[] { "short" } });
-        //Item Shop Riddles
-        riddleList.Add(new Riddle() { RiddleText = "How many doors are on the first floor of the mine?", RiddleAnswer = new string[] { "" } });
-        riddleList.Add(new Riddle() { RiddleText = "How many doors are on the second floor of the mine?", RiddleAnswer = new string[] { "" } });
-        riddleList.Add(new Riddle() { RiddleText = "What accessory adorns your face?", RiddleAnswer = new string[] { "sunglasses", "shades" } });
     }
     //Traps
     private void CreateTraps ()
@@ -281,6 +275,9 @@ public class GameSceneManager : MonoBehaviour
         CreateFireTrap(8.5f, 32.7f);
         CreateSpikeTrap(8.5f, 29.5f);
         CreateFireTrap(8.5f, 26.7f);
+        CreateFireTrap(8.5f, 37.7f);
+        CreateFireTrap(8.5f, 38.7f);
+        CreateFireTrap(8.5f, 39.7f);
     }
     private GameObject CreateSpikeTrap (float x, float y)
     {

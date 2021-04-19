@@ -7,6 +7,7 @@ public class triggerSystem : MonoBehaviour
     [SerializeField] private GameSceneManager gsm;
     [SerializeField] private UI_Shop uiShop;
     [SerializeField] private InventoryManager invMan;
+    public GameObject Potion2;
     private Item potion;
     private Item fireRing;
     private Item gem;
@@ -43,6 +44,7 @@ public class triggerSystem : MonoBehaviour
                 break;
             case "PrisonTeleporters":
                 gsm.Teleport(54.5f, 15.5f);
+                Potion2.SetActive(true);
                 break;
             case "toFloor2":
                 gsm.Teleport(33.5f, 22.5f);
@@ -103,6 +105,9 @@ public class triggerSystem : MonoBehaviour
                 break;
             case "riddle8ToFloor2":
                 gsm.ShowRiddle(7);
+                break;
+            case "riddle9":
+                gsm.ShowRiddle(8);
                 break;
             //Tips
             case "tip1Start":
