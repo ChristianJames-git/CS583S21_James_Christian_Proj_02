@@ -10,6 +10,7 @@ public class GameSceneManager : MonoBehaviour
     private PlayerStats ps;
     [SerializeField] private UI_Shop uiShop;
     [SerializeField] private InventoryManager invMan;
+    public GameObject exitRock;
     //Player and Movement
     public GameObject player;
     public Animator playerAnim;

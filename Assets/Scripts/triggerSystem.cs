@@ -23,10 +23,10 @@ public class triggerSystem : MonoBehaviour
         switch (collision.name)
         {
             //Movements
-            case "doorTrigger":
+            case "toShop":
                 gsm.Teleport(25, 0);
                 break;
-            case "returnTrigger":
+            case "fromShop":
                 gsm.Teleport(10.5f, 1);
                 break;
             case "mineEntrance":
@@ -39,7 +39,7 @@ public class triggerSystem : MonoBehaviour
             case "toFloor1":
                 gsm.Teleport(-25, 28);
                 break;
-            case "backToFloor1":
+            case "backToTutorial":
                 gsm.Teleport(-43.5f, -5.5f);
                 break;
             case "PrisonTeleporters":
@@ -50,8 +50,12 @@ public class triggerSystem : MonoBehaviour
                 gsm.Teleport(33.5f, 22.5f);
                 uiShop.AddButton("Spike Resistance Talisman", uiShop.spikeResCost, 005, 6);
                 break;
+            case "backToFloor1":
+                gsm.Teleport(-15, 20.5f);
+                break;
             case "LeaveFloor2":
                 gsm.Teleport(0, 0);
+                gsm.exitRock.SetActive(false);
                 break;
             //Shop
             case "shopArea":
