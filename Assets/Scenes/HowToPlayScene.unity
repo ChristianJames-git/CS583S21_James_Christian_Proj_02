@@ -717,7 +717,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inputPanels: []
-  mainPanel: {fileID: 0}
+  mainPanel: {fileID: 539980472}
 --- !u!4 &1377485458
 Transform:
   m_ObjectHideFlags: 0

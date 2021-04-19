@@ -19,6 +19,6 @@ public class MainSceneManager : MonoBehaviour
 
     public void onQuitClicked()
     {
-        UnityEditor.EditorApplication.isPlaying = false;
+        //UnityEditor.EditorApplication.isPlaying = false;
     }
 }
