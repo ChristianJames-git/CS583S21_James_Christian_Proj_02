@@ -13,20 +13,37 @@ public class InventoryManager : MonoBehaviour
     private int potionBoost = 50;
     public float spikeDamageMult = 1;
     public float fireDamageMult = 1;
+    public Item shades;
+    public Item potion;
+    public Item healthUp;
+    public Item armorUp;
+    public Item speedUp;
+    public Item riddleAns;
+    public Item spikeRing;
+    public Item fireRing;
+    public Item gem;
 
     // Start is called before the first frame update
     private void Start()
     {
         ps = GameManager.Instance.playerStats;
-        StartItemList();
+        InstantiateItems();
         ItemTemplate.gameObject.SetActive(false);
         Hide();
     }
 
-    private void StartItemList()
+    private void InstantiateItems()
     {
-        Item shades = new Item { itemID = 100, itemCost = 0, itemName = "Cool Sunglasses" };
+        shades = new Item { itemName = "Cool Sunglasses", itemCost = 0, itemID = 0 };
         AddItem(shades);
+        potion = new Item { itemName = "Potion", itemCost = 25, itemID = 1 };
+        healthUp = new Item { itemName = "Health +10", itemCost = 25, itemID = 2 };
+        armorUp = new Item { itemName = "Armor +2", itemCost = 25, itemID = 3 };
+        speedUp = new Item { itemName = "Speed+", itemCost = 25, itemID = 4 };
+        riddleAns = new Item { itemName = "Riddle Answer", itemCost = 25, itemID = 5 };
+        spikeRing = new Item { itemName = "Spike Resistance Ring", itemCost = 50, itemID = 6 };
+        fireRing = new Item { itemName = "Fire Resistance Ring", itemCost = 75, itemID = 7 };
+        gem = new Item { itemName = "Gemstone", itemCost = 100, itemID = 8 };
     }
     public void AddItem(Item item)
     {
@@ -69,14 +86,14 @@ public class InventoryManager : MonoBehaviour
         int index = y / -30;
         switch (itemID)
         {
-            case 100: //glasses
+            case 0: //glasses
                 if (!clickedGlasses)
                 {
                     ps.playerMaxHP++;
                     clickedGlasses = true;
                 }
                 break;
-            case 001: //potion
+            case 1: //potion
                 if (ps.playerHP != ps.playerMaxHP)
                 {
                     ps.playerHP += potionBoost;
@@ -85,17 +102,17 @@ public class InventoryManager : MonoBehaviour
                     RemoveItem(index);
                 }
                 break;
-            case 005: //Riddle Answer
+            case 5: //Riddle Answer
                 if (gsm.InUnsolvedRiddle())
                 {
                     gsm.RiddleAnswer.text = gsm.currentRiddleAnswers[0];
                     RemoveItem(index);
                 }
                 break;
-            case 006: //Spike Res
+            case 6: //Spike Res
                 spikeDamageMult = 0.2f;
                 break;
-            case 007: //Fire Res
+            case 7: //Fire Res
                 fireDamageMult = 0.2f;
                 break;
         }

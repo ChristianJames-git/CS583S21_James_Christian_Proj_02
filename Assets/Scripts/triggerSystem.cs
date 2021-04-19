@@ -6,16 +6,7 @@ public class triggerSystem : MonoBehaviour
     [SerializeField] private UI_Shop uiShop;
     [SerializeField] private InventoryManager invMan;
     public GameObject Potion2;
-    private Item potion;
-    private Item fireRing;
-    private Item gem;
 
-    private void Start()
-    {
-        potion = new Item { itemCost = 25, itemID = 001, itemName = "Potion" };
-        fireRing = new Item { itemCost = 75, itemID = 007, itemName = "Fire Resistance Ring" };
-        gem = new Item { itemCost = 100, itemID = 008, itemName = "Gem" };
-    }
     public void OnTriggerEnter2D(Collider2D collision)
     {
         switch (collision.name)
@@ -46,19 +37,19 @@ public class triggerSystem : MonoBehaviour
                 Potion2.SetActive(true);
                 break;
             case "toFloor2":
-                gsm.Teleport(33.5f, 22.5f);
-                uiShop.AddButton("Spike Resistance Ring", uiShop.spikeResCost, 006, 5);
+                gsm.Teleport(33.5f, 23f);
+                uiShop.CreateButton(invMan.spikeRing, 5);
                 break;
             case "backToFloor1":
                 gsm.Teleport(-15, 20.5f);
                 break;
             case "toExit":
-                gsm.Teleport(0, 0);
+                gsm.Teleport(8.5f, -14f);
                 gsm.exitRock.SetActive(false);
                 gsm.mineComplete = true;
                 break;
             case "backToFloor2":
-                gsm.Teleport(7.5f, 39.5f);
+                gsm.Teleport(8.5f, 41f);
                 break;
             //Shop
             case "shopArea":
@@ -174,16 +165,16 @@ public class triggerSystem : MonoBehaviour
             //Items
             case "Potion":
                 collision.gameObject.SetActive(false);
-                invMan.AddItem(potion);
+                invMan.AddItem(invMan.potion);
                 break;
             case "FireRing":
                 collision.gameObject.SetActive(false);
-                invMan.AddItem(fireRing);
+                invMan.AddItem(invMan.fireRing);
                 break;
             case "Backpack":
                 collision.gameObject.SetActive(false);
-                invMan.AddItem(gem);
-                invMan.AddItem(potion);
+                invMan.AddItem(invMan.gem);
+                invMan.AddItem(invMan.potion);
                 break;
         }
     }

@@ -9,34 +9,21 @@ public class UI_Shop : MonoBehaviour
     [SerializeField] private InventoryManager invMan;
     public Transform container;
     public Transform shopItemTemplate;
-    private int healthCost = 25;
-    private int armorCost = 25;
-    private int potionCost = 20;
-    private int speedCost = 25;
-    private int answerCost = 30;
-    public int spikeResCost = 0;
-    public int fireResCost = 0;
     private List<Transform> buttonList = new List<Transform>();
 
     private void Start()
     {
         ps = GameManager.Instance.playerStats;
-        AddButton("Potion", potionCost, 001, 0);
-        AddButton("Health +10", healthCost, 2, 1);
-        AddButton("Armor +2", armorCost, 3, 2);
-        AddButton("Speed+", speedCost, 4, 3);
-        AddButton("Riddle Answer", answerCost, 5, 4);
+        CreateButton(invMan.potion, 0);
+        CreateButton(invMan.healthUp, 1);
+        CreateButton(invMan.armorUp, 2);
+        CreateButton(invMan.speedUp, 3);
+        CreateButton(invMan.riddleAns, 4);
 
         Hide();
     }
 
-    public void AddButton(string iName, int iCost, int iID, int positionIndex)
-    {
-        Item newItem = new Item() { itemName = iName, itemCost = iCost, itemID = iID };
-        CreateButton(newItem, positionIndex);
-    }
-
-    private void CreateButton (Item item, int positionIndex)
+    public void CreateButton (Item item, int positionIndex)
     {
         Transform shopItemTransform = Instantiate(shopItemTemplate, container);
         shopItemTemplate.gameObject.SetActive(true);
@@ -79,8 +66,8 @@ public class UI_Shop : MonoBehaviour
                     break;
                 case 006:
                     invMan.AddItem(item);
-                    Destroy(buttonList[item.itemID - 1].gameObject);
-                    buttonList.RemoveAt(item.itemID - 1);
+                    Destroy(buttonList[5].gameObject);
+                    buttonList.RemoveAt(5);
                     break;
             }
             item.itemCost += 15;
