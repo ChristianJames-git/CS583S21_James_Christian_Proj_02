@@ -187,6 +187,7 @@ public class GameSceneManager : MonoBehaviour
     {
         riddleList[currentRiddle].riddleComplete = true;
         RiddleText.text = "Correct! :)";
+        RiddleAnswer.interactable = false;
         ps.purse += 10;
         switch (riddle)
         {
