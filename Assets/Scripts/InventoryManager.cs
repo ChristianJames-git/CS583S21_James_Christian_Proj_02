@@ -29,7 +29,7 @@ public class InventoryManager : MonoBehaviour
         ps = GameManager.Instance.playerStats;
         InstantiateItems();
         ItemTemplate.gameObject.SetActive(false);
-        Hide();
+        gameObject.SetActive(false);
     }
 
     private void InstantiateItems()
@@ -116,14 +116,5 @@ public class InventoryManager : MonoBehaviour
                 fireDamageMult = 0.2f;
                 break;
         }
-    }
-
-    public void Show()
-    {
-        gameObject.SetActive(true);
-    }
-    public void Hide()
-    {
-        gameObject.SetActive(false);
     }
 }

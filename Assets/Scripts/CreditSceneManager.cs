@@ -1,11 +1,12 @@
 ﻿using UnityEngine;
-using UnityEngine.SceneManagement;
 public class CreditSceneManager : MonoBehaviour
 {
+    private GameManager gm;
     public GameObject Page1, Page2;
 
     void Start()
     {
+        gm = GameManager.Instance;
         Page1.SetActive(true);
         Page2.SetActive(false);
     }
@@ -18,6 +19,6 @@ public class CreditSceneManager : MonoBehaviour
             Page2.SetActive(true);
         }
         else
-            SceneManager.LoadScene("MainScene");
+            gm.ToScene("MainScene");
     }
 }

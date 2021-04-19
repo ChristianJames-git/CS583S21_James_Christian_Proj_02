@@ -1,20 +1,23 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.SceneManagement;
+﻿using UnityEngine;
 
 public class MainSceneManager : MonoBehaviour
 {
+    private GameManager gm;
     public GameObject mainPanel;
+
+    private void Start()
+    {
+        gm = GameManager.Instance;
+    }
 
     public void onPlayClicked()
     {
-        SceneManager.LoadScene("PlayScene");
+        gm.ToScene("PlayScene");
     }
 
     public void onHowToPlayClicked()
     {
-        SceneManager.LoadScene("HowToPlayScene");
+        gm.ToScene("HowToPlayScene");
     }
 
     public void onQuitClicked()

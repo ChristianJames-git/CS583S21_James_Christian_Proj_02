@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class HTPSceneManager : MonoBehaviour
 {
+    private GameManager gm;
     public List<GameObject> inputPanels;
     public GameObject mainPanel; //panels
     private int currentPanel;
@@ -11,6 +11,7 @@ public class HTPSceneManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        gm = GameManager.Instance;
         inputPanels.Add(mainPanel);
         resetPanels();
     }
@@ -21,7 +22,7 @@ public class HTPSceneManager : MonoBehaviour
         if (currentPanel < inputPanels.Count)
             inputPanels[currentPanel].SetActive(true);
         else
-            SceneManager.LoadScene("MainScene");
+            gm.ToScene("MainScene");
     }
 
     private void resetPanels()

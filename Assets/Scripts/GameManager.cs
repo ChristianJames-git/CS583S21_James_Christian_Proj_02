@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -48,6 +49,11 @@ public class GameManager : MonoBehaviour
             Debug.LogError("Save file not found in" + path);
             return null;
         }
+    }
+
+    public void ToScene(string sceneName)
+    {
+        SceneManager.LoadScene(sceneName);
     }
 }
 

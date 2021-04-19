@@ -3,10 +3,16 @@ using UnityEngine.SceneManagement;
 
 public class triggerSystem : MonoBehaviour
 {
+    private GameManager gm;
     [SerializeField] private GameSceneManager gsm;
     [SerializeField] private UI_Shop uiShop;
     [SerializeField] private InventoryManager invMan;
     public GameObject Potion2;
+
+    private void Start()
+    {
+        gm = GameManager.Instance;
+    }
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
@@ -55,19 +61,19 @@ public class triggerSystem : MonoBehaviour
                 gsm.Teleport(8.5f, 41f);
                 break;
             case "toEnd":
-                SceneManager.LoadScene("Credits");
+                gm.ToScene("Credits");
                 break;
             //Shop
             case "shopArea":
                 uiShop.Show();
                 break;
             case "healArea":
-                GameManager.Instance.playerStats.playerHP = GameManager.Instance.playerStats.playerMaxHP;
+                gm.playerStats.playerHP = gm.playerStats.playerMaxHP;
                 break;
             //Chests
             case "Chest1":
                 collision.gameObject.SetActive(false);
-                GameManager.Instance.playerStats.purse += 50;
+                gm.playerStats.purse += 50;
                 break;
             case "Chest2":
                 collision.gameObject.SetActive(false);
@@ -160,8 +166,7 @@ public class triggerSystem : MonoBehaviour
                 gsm.Tip.SetActive(true);
                 break;
             case "tip9End":
-                gsm.TipText.text = "You did it! I didn't think you would but people continue to surprise me. Hope you enjoyed my small town, now go return to yours with your loot. Here's some extra cash too";
-                GameManager.Instance.playerStats.purse += 50;
+                gsm.TipText.text = "You did it! I didn't think you would but people continue to surprise me. Hope you enjoyed my small town, now go return to yours with your loot";
                 gsm.Tip.SetActive(true);
                 break;
             //Traps

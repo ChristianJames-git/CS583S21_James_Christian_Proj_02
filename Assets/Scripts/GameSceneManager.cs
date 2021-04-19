@@ -9,6 +9,7 @@ public class GameSceneManager : MonoBehaviour
     private PlayerStats ps;
     [SerializeField] private UI_Shop uiShop;
     [SerializeField] private InventoryManager invMan;
+    public GameObject Menu;
     public GameObject exitRock;
     //Player and Movement
     public GameObject player;
@@ -85,12 +86,9 @@ public class GameSceneManager : MonoBehaviour
         purseDisplay.text = "" + ps.purse;
 
         if (Input.GetKeyDown(KeyCode.Tab))
-        {
-            if (invMan.gameObject.activeSelf)
-                invMan.Hide();
-            else
-                invMan.Show();
-        }
+            invMan.gameObject.SetActive(!invMan.gameObject.activeSelf);
+        if (Input.GetKeyDown(KeyCode.Escape))
+            Menu.SetActive(!Menu.activeSelf);
     }
 
     //Movements
@@ -308,7 +306,7 @@ public class GameSceneManager : MonoBehaviour
         if (ps.playerHP <= 0) //Die
             Death();
     }
-    //Save/Load
+    //Menu
     public void SavePlayer()
     {
         ps.position[0] = pos.x;
@@ -320,6 +318,14 @@ public class GameSceneManager : MonoBehaviour
         ps = gm.LoadPlayer();
         pos.x = ps.position[0];
         pos.y = ps.position[1];
+    }
+    public void BackToGame()
+    {
+        Menu.SetActive(false);
+    }
+    public void ExitGame()
+    {
+        gm.ToScene("MainScene");
     }
     //Death
     private void Death()
