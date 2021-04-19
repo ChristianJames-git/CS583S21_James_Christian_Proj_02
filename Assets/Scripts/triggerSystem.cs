@@ -9,11 +9,13 @@ public class triggerSystem : MonoBehaviour
     [SerializeField] private InventoryManager invMan;
     private Item potion;
     private Item fireRing;
+    private Item gem;
 
     private void Start()
     {
         potion = new Item { itemCost = 25, itemID = 001, itemName = "Potion" };
         fireRing = new Item { itemCost = 0, itemID = 006, itemName = "Fire Resistance Talisman" };
+        gem = new Item { itemCost = 100, itemID = 007, itemName = "Gem" };
     }
     public void OnTriggerEnter2D(Collider2D collision)
     {
@@ -43,8 +45,7 @@ public class triggerSystem : MonoBehaviour
                 gsm.Teleport(45.5f, 15.5f);
                 break;
             case "toFloor2":
-                //Location TBD
-                gsm.Teleport(0, 0);
+                gsm.Teleport(33.5f, 22.5f);
                 uiShop.AddButton("Spike Resistance Talisman", uiShop.spikeResCost, 005, 4);
                 break;
             case "LeaveFloor2":
@@ -156,6 +157,11 @@ public class triggerSystem : MonoBehaviour
                 collision.gameObject.SetActive(false);
                 invMan.AddItem(fireRing);
                 break;
+            case "Backpack":
+                collision.gameObject.SetActive(false);
+                invMan.AddItem(gem);
+                invMan.AddItem(potion);
+                break;
         }
     }
 
@@ -181,6 +187,10 @@ public class triggerSystem : MonoBehaviour
             case "tip2Shop":
             case "tip3Mine":
             case "tip4Trap":
+            case "tip5Puzzle":
+            case "tip6Teleporters":
+            case "tip7Prison":
+            case "tip8Ring":
                 gsm.Tip.SetActive(false);
                 break;
         }
