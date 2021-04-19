@@ -86,18 +86,18 @@ public class InventoryManager : MonoBehaviour
                     RemoveItem(index);
                 }
                 break;
-            case 005: //Spike Res
-                spikeDamageMult = 0.2f;
-                break;
-            case 006: //Fire Res
-                fireDamageMult = 0.2f;
-                break;
-            case 007: //Riddle Answer
+            case 005: //Riddle Answer
                 if (gsm.InUnsolvedRiddle())
                 {
                     gsm.RiddleAnswer.text = gsm.currentRiddleAnswers[0];
                     RemoveItem(index);
                 }
+                break;
+            case 006: //Spike Res
+                spikeDamageMult = 0.2f;
+                break;
+            case 007: //Fire Res
+                fireDamageMult = 0.2f;
                 break;
         }
     }

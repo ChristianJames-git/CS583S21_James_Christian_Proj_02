@@ -14,8 +14,8 @@ public class triggerSystem : MonoBehaviour
     private void Start()
     {
         potion = new Item { itemCost = 25, itemID = 001, itemName = "Potion" };
-        fireRing = new Item { itemCost = 0, itemID = 006, itemName = "Fire Resistance Talisman" };
-        gem = new Item { itemCost = 100, itemID = 007, itemName = "Gem" };
+        fireRing = new Item { itemCost = 0, itemID = 007, itemName = "Fire Resistance Talisman" };
+        gem = new Item { itemCost = 100, itemID = 008, itemName = "Gem" };
     }
     public void OnTriggerEnter2D(Collider2D collision)
     {
@@ -42,15 +42,14 @@ public class triggerSystem : MonoBehaviour
                 gsm.Teleport(-43.5f, -5.5f);
                 break;
             case "PrisonTeleporters":
-                gsm.Teleport(45.5f, 15.5f);
+                gsm.Teleport(54.5f, 15.5f);
                 break;
             case "toFloor2":
                 gsm.Teleport(33.5f, 22.5f);
-                uiShop.AddButton("Spike Resistance Talisman", uiShop.spikeResCost, 005, 4);
+                uiShop.AddButton("Spike Resistance Talisman", uiShop.spikeResCost, 005, 6);
                 break;
             case "LeaveFloor2":
                 gsm.Teleport(0, 0);
-                uiShop.AddButton("Fire Resistance Talisman", uiShop.fireResCost, 006, 5);
                 break;
             //Shop
             case "shopArea":

@@ -26,7 +26,7 @@ public class UI_Shop : MonoBehaviour
         AddButton("Health +10", healthCost, 2, 1);
         AddButton("Armor +2", armorCost, 3, 2);
         AddButton("Speed+", speedCost, 4, 3);
-        AddButton("Riddle Answer", answerCost, 7, 5);
+        AddButton("Riddle Answer", answerCost, 5, 4);
 
         Hide();
     }
@@ -66,7 +66,7 @@ public class UI_Shop : MonoBehaviour
             switch (item.itemID)
             {
                 case 001:
-                case 007:
+                case 005:
                     invMan.AddItem(item);
                     break;
                 case 002:
@@ -78,7 +78,6 @@ public class UI_Shop : MonoBehaviour
                 case 004:
                     ps.speed += 1;
                     break;
-                case 005:
                 case 006:
                     invMan.AddItem(item);
                     Destroy(buttonList[item.itemID - 1].gameObject);
