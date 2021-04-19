@@ -14,6 +14,7 @@ public class UI_Shop : MonoBehaviour
     private int armorCost = 25;
     private int potionCost = 20;
     private int speedCost = 25;
+    private int answerCost = 30;
     public int spikeResCost = 0;
     public int fireResCost = 0;
     private List<Transform> buttonList = new List<Transform>();
@@ -25,13 +26,14 @@ public class UI_Shop : MonoBehaviour
         AddButton("Health +10", healthCost, 2, 1);
         AddButton("Armor +2", armorCost, 3, 2);
         AddButton("Speed+", speedCost, 4, 3);
+        AddButton("Riddle Answer", answerCost, 7, 5);
 
         Hide();
     }
 
     public void AddButton(string iName, int iCost, int iID, int positionIndex)
     {
-        Item newItem = new Item() { itemCost = iCost, itemName = iName, itemID = iID };
+        Item newItem = new Item() { itemName = iName, itemCost = iCost, itemID = iID };
         CreateButton(newItem, positionIndex);
     }
 
@@ -61,11 +63,10 @@ public class UI_Shop : MonoBehaviour
         {
             ps.purse -= item.itemCost;
             ps.shopPurchases[item.itemID - 1]++;
-            item.itemCost += 15;
-            buttonList[item.itemID - 1].Find("itemPrice").GetComponent<TextMeshProUGUI>().SetText(item.itemCost.ToString());
             switch (item.itemID)
             {
                 case 001:
+                case 007:
                     invMan.AddItem(item);
                     break;
                 case 002:
@@ -84,7 +85,8 @@ public class UI_Shop : MonoBehaviour
                     buttonList.RemoveAt(item.itemID - 1);
                     break;
             }
-            
+            item.itemCost += 15;
+            buttonList[item.itemID - 1].Find("itemPrice").GetComponent<TextMeshProUGUI>().SetText(item.itemCost.ToString());
         }
     }
 

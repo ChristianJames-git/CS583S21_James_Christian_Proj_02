@@ -21,7 +21,7 @@ public class GameSceneManager : MonoBehaviour
     public TMP_Text RiddleText;
     public TMP_InputField RiddleAnswer;
     public List<Riddle> riddleList = new List<Riddle>();
-    private string[] currentRiddleAnswers;
+    public string[] currentRiddleAnswers;
     private int currentRiddle;
     private int nextChestRiddle = 0;
     private bool chestRiddleComplete = false;
@@ -74,7 +74,7 @@ public class GameSceneManager : MonoBehaviour
         if (!dead)
             Move(horizontalMove, verticalMove);
 
-        if (Riddle.activeSelf && !riddleList[currentRiddle].riddleComplete)
+        if (InUnsolvedRiddle())
             for (int i = 0; i < currentRiddleAnswers.Length; i++)
                 if (RiddleAnswer.text.ToLower() == currentRiddleAnswers[i])
                     RiddleComplete(currentRiddle);
@@ -229,6 +229,10 @@ public class GameSceneManager : MonoBehaviour
                 break;
         }
     }
+    public bool InUnsolvedRiddle()
+    {
+        return Riddle.activeSelf && !riddleList[currentRiddle].riddleComplete;
+    }
     public void InstantiateRiddles()
     {
         //Tutorial Floor Riddles
@@ -263,18 +267,20 @@ public class GameSceneManager : MonoBehaviour
         CreateSpikeTrap(-44.5f, 8.5f);
         CreateSpikeTrap(-44.5f, 9.5f);
         //Floor 2
-        CreateFireTrap(42.5f, 23.5f);
-        CreateFireTrap(43.5f, 25.5f);
-        CreateFireTrap(43.5f, 26.5f);
-        CreateFireTrap(42.5f, 28.5f);
-        CreateFireTrap(42.5f, 28.5f);
-        CreateFireTrap(42.5f, 30.5f);
+        CreateFireTrap(42.5f, 23.7f);
+        CreateFireTrap(43.5f, 25.7f);
+        CreateFireTrap(43.5f, 26.7f);
+        CreateFireTrap(42.5f, 28.7f);
+        CreateFireTrap(42.5f, 29.7f);
+        CreateFireTrap(43.5f, 31.7f);
+        CreateFireTrap(43.5f, 32.7f);
+        CreateFireTrap(42.5f, 34.7f);
         CreateSpikeTrap(26.5f, 35.5f);
-        CreateFireTrap(20.5f, 29.5f);
-        CreateFireTrap(17.5f, 33.5f);
-        CreateFireTrap(8.5f, 32.5f);
+        CreateFireTrap(20.5f, 29.7f);
+        CreateFireTrap(17.5f, 33.7f);
+        CreateFireTrap(8.5f, 32.7f);
         CreateSpikeTrap(8.5f, 29.5f);
-        CreateFireTrap(8.5f, 26.5f);
+        CreateFireTrap(8.5f, 26.7f);
     }
     private GameObject CreateSpikeTrap (float x, float y)
     {

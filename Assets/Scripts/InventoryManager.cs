@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class InventoryManager : MonoBehaviour
 {
     private PlayerStats ps;
+    [SerializeField] private GameSceneManager gsm;
     public List<Transform> itemButtonList = new List<Transform>();
     public Transform ItemTemplate;
     private bool clickedGlasses;
@@ -90,6 +91,13 @@ public class InventoryManager : MonoBehaviour
                 break;
             case 006: //Fire Res
                 fireDamageMult = 0.2f;
+                break;
+            case 007: //Riddle Answer
+                if (gsm.InUnsolvedRiddle())
+                {
+                    gsm.RiddleAnswer.text = gsm.currentRiddleAnswers[0];
+                    RemoveItem(index);
+                }
                 break;
         }
     }
