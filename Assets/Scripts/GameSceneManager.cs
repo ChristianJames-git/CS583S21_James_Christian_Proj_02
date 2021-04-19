@@ -124,11 +124,6 @@ public class GameSceneManager : MonoBehaviour
         }
         for (int j = 0; j < riddleList.Count; j++)
             riddleList[j].riddleComplete = false;
-        chestRiddleComplete = false;
-        for (int i = 0; i < chestRiddleTraps.Count; i++)
-            GameObject.Destroy(chestRiddleTraps[i]);
-        chestRiddleTraps.Clear();
-        chestNumRand = Random.Range(0, 4);
     }
     private void Unlock(int doorNum)
     {
@@ -175,6 +170,14 @@ public class GameSceneManager : MonoBehaviour
                 nextChestRiddle = 0;
             }
         }
+    }
+    public void ChestPuzzleReset()
+    {
+        chestRiddleComplete = false;
+        for (int i = 0; i < chestRiddleTraps.Count; i++)
+            GameObject.Destroy(chestRiddleTraps[i]);
+        chestRiddleTraps.Clear();
+        chestNumRand = Random.Range(0, 4);
     }
     //Riddles
     public void ShowRiddle(int category)

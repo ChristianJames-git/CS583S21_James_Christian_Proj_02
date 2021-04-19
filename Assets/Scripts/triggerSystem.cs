@@ -28,6 +28,7 @@ public class triggerSystem : MonoBehaviour
                 break;
             case "toFloor1":
                 gsm.Teleport(-25, 28);
+                gsm.ChestPuzzleReset();
                 break;
             case "backToTutorial":
                 gsm.Teleport(-43.5f, -5.5f);
@@ -42,6 +43,7 @@ public class triggerSystem : MonoBehaviour
                 break;
             case "backToFloor1":
                 gsm.Teleport(-15, 20.5f);
+                gsm.ChestPuzzleReset();
                 break;
             case "toExit":
                 gsm.Teleport(8.5f, -14f);
