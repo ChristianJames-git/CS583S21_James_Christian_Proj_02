@@ -62,12 +62,13 @@ public class triggerSystem : MonoBehaviour
                 break;
             //Chests
             case "Chest1":
-                gsm.Chest(0);
-                collision.GetComponent<Collider2D>().enabled = false;
+                collision.gameObject.SetActive(false);
+                GameManager.Instance.playerStats.purse += 50;
                 break;
             case "Chest2":
-                gsm.Chest(1);
-                collision.GetComponent<Collider2D>().enabled = false;
+                collision.gameObject.SetActive(false);
+                invMan.AddItem(invMan.gem);
+                invMan.AddItem(invMan.potion);
                 break;
             case "Chest3A":
                 gsm.ChestPuzzle(0);

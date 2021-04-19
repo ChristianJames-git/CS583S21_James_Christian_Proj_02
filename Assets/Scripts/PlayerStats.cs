@@ -13,6 +13,5 @@ public class PlayerStats
     public int playerArmor = 0; //armor, resists damage
     public int purse = 0;
     public List<Item> itemList = new List<Item>();
-    public bool[] chestCollected = new bool[2];
     public int[] shopPurchases = new int[7];
 }

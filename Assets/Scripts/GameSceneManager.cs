@@ -131,22 +131,6 @@ public class GameSceneManager : MonoBehaviour
         doorList[doorNum].GetComponent<SpriteRenderer>().sprite = unlockedDoor;
     }
     //Chests
-    public void Chest(int chestNum)
-    {
-        if (!ps.chestCollected[chestNum])
-        {
-            switch (chestNum)
-            {
-                case 0:
-                    ps.purse += 50;
-                    break;
-                case 1:
-                    //Add reward, maybe achievement or +1 to health or accessory (or multiple)
-                    break;
-            }
-            ps.chestCollected[chestNum] = true;
-        }
-    }
     public void ChestPuzzle(int chestNum)
     {
         chestNum = (chestNum + chestNumRand) % 4;
