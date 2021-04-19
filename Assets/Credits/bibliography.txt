@@ -1,5 +1,19 @@
-Riddles: https://parade.com/947956/parade/riddles/
+AhNinniah (2018, October 29). Free Game Items. In Unity Asset Store. Retrieved from https://assetstore.unity.com/packages/2d/environments/free-game-items-131764
 
-Traps: https://stealthix.itch.io/animated-traps
+Ansimuz (n.d.). Patreon's Top Down Collection. In itch.io. Retrieved from https://ansimuz.itch.io/patreons-top-down-collection?download
 
-Skull: https://kvsr.itch.io/skull-sprite
+Brackeys (2018, December 2). SAVE & LOAD SYSTEM in Unity. In YouTube. Retrieved from https://www.youtube.com/watch?v=XOjd_qU2Ido
+
+Conway Jr., D., Nila122, Sjolund, J., Challener, S., Brimhall, T., Whitlock, M., Krohn, M., & Untinen, T. (n.d.). Universal LPC Spritesheet Character Generator. In github.com. Retrieved from https://github.com/sanderfrenken/Universal-LPC-Spritesheet-Character-Generator
+
+Donvito, T. (2020, April 30). 101 Riddles That Will Stump You Every Time (But Don’t Worry—We’ll Give You the Answers). In Parade. Retrieved from https://parade.com/947956/parade/riddles/
+
+James, C. (Artist). (2021). RiddleIcon.
+
+Monkey, C. (2019, December 27). Simple Shop in Unity (Buy Items, Weapons, Armor). In YouTube. Retrieved from https://www.youtube.com/watch?v=HuXy4XX0hzg
+
+NYKNCK (n.d.). Skull Sprite. In itch.io. Retrieved from https://kvsr.itch.io/skull-sprite
+
+Stealthix (n.d.). Animated Traps. In itch.io. Retrieved from https://stealthix.itch.io/animated-traps
+
+RAFMANIX, . (2021, January 18). 2D Halloween Decoration. In Unity Asset Store. Retrieved from https://assetstore.unity.com/packages/2d/environments/2d-halloween-decoration-102536
