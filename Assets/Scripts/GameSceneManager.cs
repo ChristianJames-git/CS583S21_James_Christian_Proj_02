@@ -36,7 +36,9 @@ public class GameSceneManager : MonoBehaviour
     public GameObject door1, door2, door3, door4, door5, door6, door7, door8, door9, door10, door11, door12, door13, door14, door15, door16;
     public Sprite unlockedDoor;
     public Sprite lockedDoor;
+    public bool mineComplete;
     //Traps
+    public Transform Traps;
     public GameObject spikeTrap;
     private int spikeDamage = 40;
     public GameObject fireTrap;
@@ -271,7 +273,7 @@ public class GameSceneManager : MonoBehaviour
         CreateFireTrap(43.5f, 32.7f);
         CreateFireTrap(42.5f, 34.7f);
         CreateSpikeTrap(26.5f, 35.5f);
-        CreateFireTrap(20.5f, 29.7f);
+        CreateFireTrap(20.5f, 30.7f);
         CreateFireTrap(17.5f, 33.7f);
         CreateFireTrap(8.5f, 32.7f);
         CreateSpikeTrap(8.5f, 29.5f);
@@ -279,10 +281,12 @@ public class GameSceneManager : MonoBehaviour
         CreateFireTrap(8.5f, 37.7f);
         CreateFireTrap(8.5f, 38.7f);
         CreateFireTrap(8.5f, 39.7f);
+        spikeTrap.SetActive(false);
+        fireTrap.SetActive(false);
     }
     private GameObject CreateSpikeTrap (float x, float y)
     {
-        GameObject newSpikeTrap = Instantiate(spikeTrap);
+        GameObject newSpikeTrap = Instantiate(spikeTrap, Traps);
         newSpikeTrap.name = "Spike";
         newSpikeTrap.SetActive(true);
         newSpikeTrap.transform.position = new Vector2(x, y);
@@ -290,7 +294,7 @@ public class GameSceneManager : MonoBehaviour
     }
     private GameObject CreateFireTrap (float x, float y)
     {
-        GameObject newFireTrap = Instantiate(fireTrap);
+        GameObject newFireTrap = Instantiate(fireTrap, Traps);
         newFireTrap.name = "Fire";
         newFireTrap.SetActive(true);
         newFireTrap.transform.position = new Vector2(x, y);
@@ -346,7 +350,8 @@ public class GameSceneManager : MonoBehaviour
         playerAnim.SetBool("Death", false);
         dead = false;
         ps.playerHP = 1;
-        LockAll();
+        if (!mineComplete)
+            LockAll();
         ps.purse /= 2;
     }
     private void CreateTombstone(float x, float y)

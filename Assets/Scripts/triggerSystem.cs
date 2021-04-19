@@ -31,10 +31,11 @@ public class triggerSystem : MonoBehaviour
                 break;
             case "mineEntrance":
                 gsm.Teleport(-52, 1);
+                if (!gsm.mineComplete)
+                    gsm.LockAll();
                 break;
             case "mineExit":
                 gsm.Teleport(-7, 0);
-                gsm.LockAll();
                 break;
             case "toFloor1":
                 gsm.Teleport(-25, 28);
@@ -53,9 +54,13 @@ public class triggerSystem : MonoBehaviour
             case "backToFloor1":
                 gsm.Teleport(-15, 20.5f);
                 break;
-            case "LeaveFloor2":
+            case "toExit":
                 gsm.Teleport(0, 0);
                 gsm.exitRock.SetActive(false);
+                gsm.mineComplete = true;
+                break;
+            case "backToFloor2":
+                gsm.Teleport(7.5f, 39.5f);
                 break;
             //Shop
             case "shopArea":
@@ -112,6 +117,18 @@ public class triggerSystem : MonoBehaviour
                 break;
             case "riddle9":
                 gsm.ShowRiddle(8);
+                break;
+            case "riddle10":
+                gsm.ShowRiddle(9);
+                break;
+            case "riddle11":
+                gsm.ShowRiddle(10);
+                break;
+            case "riddle12":
+                gsm.ShowRiddle(11);
+                break;
+            case "riddle13":
+                gsm.ShowRiddle(12);
                 break;
             //Tips
             case "tip1Start":
@@ -188,6 +205,11 @@ public class triggerSystem : MonoBehaviour
             case "riddle6ToChestRoom":
             case "riddle7LeftRoom":
             case "riddle8ToFloor2":
+            case "riddle9":
+            case "riddle10":
+            case "riddle11":
+            case "riddle12":
+            case "riddle13":
                 gsm.Riddle.SetActive(false);
                 gsm.RiddleAnswer.text = "";
                 break;
