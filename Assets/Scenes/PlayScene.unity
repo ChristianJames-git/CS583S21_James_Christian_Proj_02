@@ -452,7 +452,7 @@ GameObject:
   - component: {fileID: 78289396}
   - component: {fileID: 78289395}
   m_Layer: 0
-  m_Name: riddle13
+  m_Name: riddle12
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -470,7 +470,7 @@ Transform:
   m_LocalScale: {x: 0.01, y: 0.01, z: 1}
   m_Children: []
   m_Father: {fileID: 1495644577}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &78289395
 BoxCollider2D:
@@ -15073,7 +15073,7 @@ GameObject:
   - component: {fileID: 1191224164}
   - component: {fileID: 1191224163}
   m_Layer: 0
-  m_Name: riddle12
+  m_Name: riddle13
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15091,7 +15091,7 @@ Transform:
   m_LocalScale: {x: 0.01, y: 0.01, z: 1}
   m_Children: []
   m_Father: {fileID: 1495644577}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1191224163
 BoxCollider2D:
@@ -17319,8 +17319,8 @@ Transform:
   - {fileID: 801896062}
   - {fileID: 1277154897}
   - {fileID: 2088971311}
-  - {fileID: 1191224162}
   - {fileID: 78289394}
+  - {fileID: 1191224162}
   m_Father: {fileID: 2040939618}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
