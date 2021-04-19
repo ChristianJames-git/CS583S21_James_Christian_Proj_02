@@ -63,6 +63,7 @@ public class GameSceneManager : MonoBehaviour
         InstantiateRiddles();
         Riddle.SetActive(false);
         DeathScreen.SetActive(false);
+        Menu.SetActive(false);
         CreateTraps();
         chestNumRand = Random.Range(0, 4);
 

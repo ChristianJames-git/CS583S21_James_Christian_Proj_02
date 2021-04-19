@@ -4824,7 +4824,6 @@ GameObject:
   - component: {fileID: 884635849}
   - component: {fileID: 884635852}
   - component: {fileID: 884635851}
-  - component: {fileID: 884635850}
   m_Layer: 5
   m_Name: Menu
   m_TagString: Untagged
@@ -4856,23 +4855,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 300, y: 400}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &884635850
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 884635848}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 228215fc5afe5e844b0a2aa9a1cffc2d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gsm: {fileID: 1971092470}
-  itemButtonList: []
-  ItemTemplate: {fileID: 0}
-  spikeDamageMult: 1
-  fireDamageMult: 1
 --- !u!114 &884635851
 MonoBehaviour:
   m_ObjectHideFlags: 0
