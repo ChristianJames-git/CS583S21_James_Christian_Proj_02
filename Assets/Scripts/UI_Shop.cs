@@ -45,10 +45,10 @@ public class UI_Shop : MonoBehaviour
 
     private void BuyItem(Item item)
     {
+        int ID = item.itemID - 1;
+        int price = int.Parse(buttonList[ID].Find("itemPrice").GetComponent<TextMeshProUGUI>().text);
         if (item.itemCost <= ps.purse)
         {
-            int ID = item.itemID - 1;
-            int price = int.Parse(buttonList[ID].Find("itemPrice").GetComponent<TextMeshProUGUI>().text);
             ps.purse -= price;
             ps.shopPurchases[ID]++;
             price += 15;
