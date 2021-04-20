@@ -47,10 +47,12 @@ public class UI_Shop : MonoBehaviour
     {
         if (item.itemCost <= ps.purse)
         {
-            ps.purse -= item.itemCost;
-            ps.shopPurchases[item.itemID - 1]++;
-            item.itemCost += 15;
-            buttonList[item.itemID - 1].Find("itemPrice").GetComponent<TextMeshProUGUI>().SetText(item.itemCost.ToString());
+            int ID = item.itemID - 1;
+            int price = int.Parse(buttonList[ID].Find("itemPrice").GetComponent<TextMeshProUGUI>().text);
+            ps.purse -= price;
+            ps.shopPurchases[ID]++;
+            price += 15;
+            buttonList[ID].Find("itemPrice").GetComponent<TextMeshProUGUI>().SetText(price.ToString());
             switch (item.itemID)
             {
                 case 001:
@@ -68,8 +70,8 @@ public class UI_Shop : MonoBehaviour
                     break;
                 case 006:
                     invMan.AddItem(item);
-                    Destroy(buttonList[5].gameObject);
-                    buttonList.RemoveAt(5);
+                    Destroy(buttonList[ID].gameObject);
+                    buttonList.RemoveAt(ID);
                     break;
             }
         }

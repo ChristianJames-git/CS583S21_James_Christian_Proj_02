@@ -7,6 +7,7 @@ public class InventoryManager : MonoBehaviour
 {
     private GameManager gm;
     private PlayerStats ps;
+    [SerializeField] private UI_Shop uiShop;
     [SerializeField] private GameSceneManager gsm;
     public List<Transform> itemButtonList = new List<Transform>();
     public Transform ItemTemplate;
@@ -79,7 +80,10 @@ public class InventoryManager : MonoBehaviour
 
         void onClick()
         {
-            OnItemClick(item.itemID, y);
+            if (uiShop.gameObject.activeSelf)
+                SellItem(item.itemID, y);
+            else
+                OnItemClick(item.itemID, y);
         }
     }
     private void UpdateItemDisplay()
@@ -123,6 +127,25 @@ public class InventoryManager : MonoBehaviour
                 break;
             case 9: //Shield Potion
                 ps.playerArmor += 2;
+                RemoveItem(index);
+                break;
+        }
+    }
+    private void SellItem(int itemID, int y)
+    {
+        int index = y / -30;
+        switch (itemID)
+        {
+            case 1:
+                ps.purse += potion.itemCost;
+                RemoveItem(index);
+                break;
+            case 5:
+                ps.purse += riddleAns.itemCost;
+                RemoveItem(index);
+                break;
+            case 8:
+                ps.purse += gem.itemCost;
                 RemoveItem(index);
                 break;
         }
