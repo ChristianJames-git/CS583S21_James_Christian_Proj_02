@@ -8,6 +8,7 @@ public class triggerSystem : MonoBehaviour
     [SerializeField] private UI_Shop uiShop;
     [SerializeField] private InventoryManager invMan;
     public GameObject Potion2;
+    private bool spikeRingAdded;
 
     private void Start()
     {
@@ -50,7 +51,11 @@ public class triggerSystem : MonoBehaviour
                 break;
             case "toFloor2":
                 gsm.Teleport(33.5f, 23f);
-                uiShop.CreateButton(invMan.spikeRing, 5);
+                if (!spikeRingAdded)
+                {
+                    uiShop.CreateButton(invMan.spikeRing, 5);
+                    spikeRingAdded = true;
+                }
                 break;
             case "backToFloor1":
                 gsm.Teleport(-15, 20.5f);
