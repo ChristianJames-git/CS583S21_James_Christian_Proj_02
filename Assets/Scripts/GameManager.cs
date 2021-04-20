@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
 {
     public PlayerStats playerStats;
     public Sprite mainChar;
+    public bool secretClicked;
     public static GameManager Instance { get; private set; }
 
     void Awake()

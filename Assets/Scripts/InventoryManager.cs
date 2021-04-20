@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class InventoryManager : MonoBehaviour
 {
+    private GameManager gm;
     private PlayerStats ps;
     [SerializeField] private GameSceneManager gsm;
     public List<Transform> itemButtonList = new List<Transform>();
@@ -22,11 +23,13 @@ public class InventoryManager : MonoBehaviour
     public Item spikeRing;
     public Item fireRing;
     public Item gem;
+    public Item shield;
 
     // Start is called before the first frame update
     private void Start()
     {
-        ps = GameManager.Instance.playerStats;
+        gm = GameManager.Instance;
+        ps = gm.playerStats;
         InstantiateItems();
         ItemTemplate.gameObject.SetActive(false);
         gameObject.SetActive(false);
@@ -44,6 +47,9 @@ public class InventoryManager : MonoBehaviour
         spikeRing = new Item { itemName = "Spike Resistance Ring", itemCost = 50, itemID = 6 };
         fireRing = new Item { itemName = "Fire Resistance Ring", itemCost = 75, itemID = 7 };
         gem = new Item { itemName = "Gemstone", itemCost = 100, itemID = 8 };
+        shield = new Item { itemName = "Secret Shield Potion", itemCost = 0, itemID = 9 };
+        if (gm.secretClicked)
+            AddItem(shield);
     }
     public void AddItem(Item item)
     {
@@ -114,6 +120,10 @@ public class InventoryManager : MonoBehaviour
                 break;
             case 7: //Fire Res
                 fireDamageMult = 0.2f;
+                break;
+            case 9: //Shield Potion
+                ps.playerArmor += 2;
+                RemoveItem(index);
                 break;
         }
     }

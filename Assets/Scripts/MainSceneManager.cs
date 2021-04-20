@@ -10,6 +10,11 @@ public class MainSceneManager : MonoBehaviour
         gm = GameManager.Instance;
     }
 
+    public void onSecretClicked()
+    {
+        gm.secretClicked = true;
+    }
+
     public void onPlayClicked()
     {
         gm.ToScene("PlayScene");
@@ -22,6 +27,6 @@ public class MainSceneManager : MonoBehaviour
 
     public void onQuitClicked()
     {
-        //UnityEditor.EditorApplication.isPlaying = false;
+        Application.Quit();
     }
 }
