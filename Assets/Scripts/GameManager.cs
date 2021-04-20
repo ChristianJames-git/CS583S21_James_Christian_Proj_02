@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     public Sprite mainChar;
     public bool secretClicked;
     public static GameManager Instance { get; private set; }
+    private AudioManager audioMan;
 
     void Awake()
     {
@@ -20,6 +21,8 @@ public class GameManager : MonoBehaviour
     {
         playerStats = new PlayerStats();
         playerStats.playerSprite = mainChar;
+        audioMan = AudioManager.instance;
+        audioMan.Play("MenuMusic");
     }
 
     public void SavePlayer()

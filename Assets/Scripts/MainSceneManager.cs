@@ -17,6 +17,7 @@ public class MainSceneManager : MonoBehaviour
 
     public void onPlayClicked()
     {
+        AudioManager.instance.Stop("MenuMusic");
         gm.ToScene("PlayScene");
     }
 

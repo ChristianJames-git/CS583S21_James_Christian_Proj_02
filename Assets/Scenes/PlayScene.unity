@@ -18987,14 +18987,14 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 500
+  MaxDistance: 7.15662
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -19029,7 +19029,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -82400,7 +82400,6 @@ GameObject:
   - component: {fileID: 1971092470}
   - component: {fileID: 1971092472}
   - component: {fileID: 1971092473}
-  - component: {fileID: 1971092471}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -82570,14 +82569,6 @@ MonoBehaviour:
   tombstone1: {fileID: 21300000, guid: 88772d00184d1854b85eb573b372c997, type: 3}
   tombstone2: {fileID: 21300000, guid: ed5246d7ec8e5cc43a9201da70ac7c9c, type: 3}
   tombstone3: {fileID: 21300000, guid: dfd4964102cade54d83583202dc53d7d, type: 3}
---- !u!81 &1971092471
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1971092465}
-  m_Enabled: 1
 --- !u!114 &1971092472
 MonoBehaviour:
   m_ObjectHideFlags: 0
