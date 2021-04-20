@@ -68,8 +68,7 @@ public class InventoryManager : MonoBehaviour
     {
         Transform newItem = Instantiate(ItemTemplate, transform);
         RectTransform newItemRectTransform = newItem.GetComponent<RectTransform>();
-        int y = -30 * itemButtonList.Count;
-        newItemRectTransform.anchoredPosition = new Vector2(0, y);
+        newItemRectTransform.anchoredPosition = new Vector2(0, -30 * itemButtonList.Count);
         Transform newItemButton = newItem.GetChild(0);
         newItemButton.GetChild(0).GetComponent<TMP_Text>().text = item.itemName;
         newItemButton.GetChild(1).GetComponent<TMP_Text>().text = item.itemCost.ToString();
@@ -80,20 +79,22 @@ public class InventoryManager : MonoBehaviour
 
         void onClick()
         {
+            item.index = (int)newItem.GetComponent<RectTransform>().anchoredPosition.y / -30;
             if (uiShop.gameObject.activeSelf)
-                SellItem(item.itemID, y);
+                SellItem(item.itemID, item.index);
             else
-                OnItemClick(item.itemID, y);
+                OnItemClick(item.itemID, item.index);
         }
     }
     private void UpdateItemDisplay()
     {
         for (int i = 0; i < itemButtonList.Count; i++)
+        {
             itemButtonList[i].GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -30 * i);
+        }
     }
-    private void OnItemClick(int itemID, int y)
+    private void OnItemClick(int itemID, int index)
     {
-        int index = y / -30;
         switch (itemID)
         {
             case 0: //glasses
@@ -116,8 +117,10 @@ public class InventoryManager : MonoBehaviour
                 if (gsm.InUnsolvedRiddle())
                 {
                     gsm.RiddleAnswer.text = gsm.currentRiddleAnswers[0];
+                    Debug.Log(index);
                     RemoveItem(index);
                 }
+                Debug.Log(index);
                 break;
             case 6: //Spike Res
                 spikeDamageMult = 0.2f;
@@ -131,9 +134,8 @@ public class InventoryManager : MonoBehaviour
                 break;
         }
     }
-    private void SellItem(int itemID, int y)
+    private void SellItem(int itemID, int index)
     {
-        int index = y / -30;
         switch (itemID)
         {
             case 1:

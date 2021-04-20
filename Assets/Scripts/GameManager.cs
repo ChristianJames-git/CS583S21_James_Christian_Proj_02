@@ -66,4 +66,5 @@ public class Item
     public int itemID;
     public string itemName;
     public int itemCost;
+    public int index;
 }
