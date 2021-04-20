@@ -5,14 +5,14 @@ public class HTPSceneManager : MonoBehaviour
 {
     private GameManager gm;
     public List<GameObject> inputPanels;
-    public GameObject mainPanel; //panels
+    public GameObject Panel1, Panel2, Panel3; //panels
     private int currentPanel;
 
     // Start is called before the first frame update
     void Start()
     {
         gm = GameManager.Instance;
-        inputPanels.Add(mainPanel);
+        inputPanels = new List<GameObject> { Panel1, Panel2, Panel3 };
         resetPanels();
     }
 
