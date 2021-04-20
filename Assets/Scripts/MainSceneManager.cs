@@ -8,6 +8,7 @@ public class MainSceneManager : MonoBehaviour
     private void Start()
     {
         gm = GameManager.Instance;
+        AudioManager.instance.Play("MenuMusic");
     }
 
     public void onSecretClicked()
@@ -23,6 +24,7 @@ public class MainSceneManager : MonoBehaviour
 
     public void onHowToPlayClicked()
     {
+        AudioManager.instance.Stop("MenuMusic");
         gm.ToScene("HowToPlayScene");
     }
 
