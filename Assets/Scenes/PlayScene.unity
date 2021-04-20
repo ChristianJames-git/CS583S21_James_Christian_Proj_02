@@ -2698,7 +2698,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 500678404}
   m_OnClick:
     m_PersistentCalls:
@@ -23236,6 +23236,56 @@ MonoBehaviour:
   ItemTemplate: {fileID: 939333859}
   spikeDamageMult: 1
   fireDamageMult: 1
+  shades:
+    itemID: 0
+    itemName: 
+    itemCost: 0
+    index: 0
+  potion:
+    itemID: 0
+    itemName: 
+    itemCost: 0
+    index: 0
+  healthUp:
+    itemID: 0
+    itemName: 
+    itemCost: 0
+    index: 0
+  armorUp:
+    itemID: 0
+    itemName: 
+    itemCost: 0
+    index: 0
+  speedUp:
+    itemID: 0
+    itemName: 
+    itemCost: 0
+    index: 0
+  riddleAns:
+    itemID: 0
+    itemName: 
+    itemCost: 0
+    index: 0
+  spikeRing:
+    itemID: 0
+    itemName: 
+    itemCost: 0
+    index: 0
+  fireRing:
+    itemID: 0
+    itemName: 
+    itemCost: 0
+    index: 0
+  gem:
+    itemID: 0
+    itemName: 
+    itemCost: 0
+    index: 0
+  shield:
+    itemID: 0
+    itemName: 
+    itemCost: 0
+    index: 0
 --- !u!114 &1525745208
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -83410,7 +83460,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 1732326788}
   m_OnClick:
     m_PersistentCalls:

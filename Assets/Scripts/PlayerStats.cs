@@ -5,7 +5,6 @@ using UnityEngine;
 public class PlayerStats
 {
     public string playerName;
-    public Sprite playerSprite;
     public float[] position = { 0, 0, 0 };
     public float playerHP = 100;
     public int playerMaxHP = 100;

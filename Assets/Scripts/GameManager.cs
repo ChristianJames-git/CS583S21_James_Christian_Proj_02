@@ -20,7 +20,6 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         playerStats = new PlayerStats();
-        playerStats.playerSprite = mainChar;
         audioMan = AudioManager.instance;
         audioMan.Play("MenuMusic");
     }
@@ -28,7 +27,7 @@ public class GameManager : MonoBehaviour
     public void SavePlayer()
     {
         BinaryFormatter formatter = new BinaryFormatter();
-        string path = Application.persistentDataPath + "/player.hello";
+        string path = Application.persistentDataPath + "\\player.hello";
         FileStream stream = new FileStream(path, FileMode.Create);
 
         formatter.Serialize(stream, playerStats);
@@ -37,7 +36,7 @@ public class GameManager : MonoBehaviour
 
     public void LoadPlayer()
     {
-        string path = Application.persistentDataPath + "/player.hello";
+        string path = Application.persistentDataPath + "\\player.hello";
         if (File.Exists(path))
         {
             BinaryFormatter formatter = new BinaryFormatter();
@@ -60,6 +59,7 @@ public class GameManager : MonoBehaviour
     }
 }
 
+[System.Serializable]
 public class Item
 {
     public int itemID;

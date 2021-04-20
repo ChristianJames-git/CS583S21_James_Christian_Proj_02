@@ -1,0 +1,5 @@
+Arrow Keys control Movement
+TAB opens and closes your inventory
+ESC opens and closes the menu
+Stand on Riddle Icons to answer riddles to unlock doors
+Click on rings in your inventory to activate them
