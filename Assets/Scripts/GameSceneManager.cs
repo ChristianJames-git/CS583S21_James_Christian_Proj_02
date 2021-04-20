@@ -66,6 +66,8 @@ public class GameSceneManager : MonoBehaviour
         Menu.SetActive(false);
         CreateTraps();
         chestNumRand = Random.Range(0, 4);
+        AudioManager.instance.Play("Forest");
+        AudioManager.instance.Stop("Mine");
 
         pos.x = 0; pos.y = 0;
         transform.position = pos;
@@ -327,6 +329,8 @@ public class GameSceneManager : MonoBehaviour
     public void ExitGame()
     {
         gm.ToScene("MainScene");
+        AudioManager.instance.Stop("Forest");
+        AudioManager.instance.Stop("Mine");
     }
     //Death
     private void Death()
@@ -348,6 +352,8 @@ public class GameSceneManager : MonoBehaviour
         if (!mineComplete)
             LockAll();
         ps.purse /= 2;
+        AudioManager.instance.Play("Forest");
+        AudioManager.instance.Stop("Mine");
     }
     private void CreateTombstone(float x, float y)
     {

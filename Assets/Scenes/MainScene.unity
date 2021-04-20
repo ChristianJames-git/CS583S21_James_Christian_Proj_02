@@ -1580,7 +1580,27 @@ MonoBehaviour:
     volumeVariance: 0
     pitch: 1
     pitchVariance: 0
-    spatialBlend: 1
+    spatialBlend: 0
+    loop: 1
+    mixerGroup: {fileID: 0}
+    source: {fileID: 0}
+  - name: Forest
+    clip: {fileID: 8300000, guid: cca665441f875054d862c42067c1cae8, type: 3}
+    volume: 0.3
+    volumeVariance: 0
+    pitch: 1
+    pitchVariance: 0
+    spatialBlend: 0
+    loop: 1
+    mixerGroup: {fileID: 0}
+    source: {fileID: 0}
+  - name: Mine
+    clip: {fileID: 8300000, guid: 98cd13a54894d254a90819d9b9299bbc, type: 3}
+    volume: 4
+    volumeVariance: 0
+    pitch: 1
+    pitchVariance: 0
+    spatialBlend: 0
     loop: 1
     mixerGroup: {fileID: 0}
     source: {fileID: 0}

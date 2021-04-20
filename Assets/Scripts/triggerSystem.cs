@@ -27,11 +27,15 @@ public class triggerSystem : MonoBehaviour
                 break;
             case "mineEntrance":
                 gsm.Teleport(-52, 1);
+                AudioManager.instance.Stop("Forest");
+                AudioManager.instance.Play("Mine");
                 if (!gsm.mineComplete)
                     gsm.LockAll();
                 break;
             case "mineExit":
                 gsm.Teleport(-7, 0);
+                AudioManager.instance.Play("Forest");
+                AudioManager.instance.Stop("Mine");
                 break;
             case "toFloor1":
                 gsm.Teleport(-25, 28);
@@ -56,12 +60,17 @@ public class triggerSystem : MonoBehaviour
                 gsm.Teleport(8.5f, -14f);
                 gsm.exitRock.SetActive(false);
                 gsm.mineComplete = true;
+                AudioManager.instance.Play("Forest");
+                AudioManager.instance.Stop("Mine");
                 break;
             case "backToFloor2":
                 gsm.Teleport(8.5f, 41f);
+                AudioManager.instance.Stop("Forest");
+                AudioManager.instance.Play("Mine");
                 break;
             case "toEnd":
                 gm.ToScene("Credits");
+                AudioManager.instance.Stop("Forest");
                 break;
             //Shop
             case "shopArea":
