@@ -35,7 +35,7 @@ public class GameManager : MonoBehaviour
         stream.Close();
     }
 
-    public PlayerStats LoadPlayer()
+    public void LoadPlayer()
     {
         string path = Application.persistentDataPath + "/player.hello";
         if (File.Exists(path))
@@ -46,12 +46,11 @@ public class GameManager : MonoBehaviour
             PlayerStats stats = formatter.Deserialize(stream) as PlayerStats;
             stream.Close();
 
-            return stats;
+            playerStats = stats;
         }
         else
         {
             Debug.LogError("Save file not found in" + path);
-            return null;
         }
     }
 

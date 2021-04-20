@@ -122,14 +122,19 @@ public class GameSceneManager : MonoBehaviour
         {
             doorList[i].GetComponent<BoxCollider2D>().enabled = true;
             doorList[i].GetComponent<SpriteRenderer>().sprite = lockedDoor;
+            ps.doorUnlocked[i] = false;
         }
         for (int j = 0; j < riddleList.Count; j++)
+        {
             riddleList[j].riddleComplete = false;
+            ps.riddleComplete[j] = false;
+        }
     }
     private void Unlock(int doorNum)
     {
         doorList[doorNum].GetComponent<BoxCollider2D>().enabled = false;
         doorList[doorNum].GetComponent<SpriteRenderer>().sprite = unlockedDoor;
+        ps.doorUnlocked[doorNum] = true;
     }
     //Chests
     public void ChestPuzzle(int chestNum)
@@ -187,6 +192,7 @@ public class GameSceneManager : MonoBehaviour
     private void RiddleComplete(int riddle)
     {
         riddleList[currentRiddle].riddleComplete = true;
+        ps.riddleComplete[currentRiddle] = true;
         RiddleText.text = "Correct! :)";
         RiddleAnswer.interactable = false;
         ps.purse += 10;
@@ -318,9 +324,14 @@ public class GameSceneManager : MonoBehaviour
     }
     public void LoadPlayer()
     {
-        ps = gm.LoadPlayer();
+        gm.LoadPlayer();
         pos.x = ps.position[0];
         pos.y = ps.position[1];
+        for (int j = 0; j < riddleList.Count; j++)
+            riddleList[j].riddleComplete = ps.riddleComplete[j];
+        for (int i = 0; i < doorList.Count; i++)
+            if (ps.doorUnlocked[i])
+                Unlock(i);
     }
     public void BackToGame()
     {

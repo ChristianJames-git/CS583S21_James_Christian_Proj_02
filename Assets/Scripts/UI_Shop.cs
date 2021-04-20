@@ -33,7 +33,8 @@ public class UI_Shop : MonoBehaviour
         shopItemRectTransform.anchoredPosition = new Vector2(0, -shopItemHeight * positionIndex);
 
         shopItemTransform.Find("itemName").GetComponent<TextMeshProUGUI>().SetText(item.itemName);
-        shopItemTransform.Find("itemPrice").GetComponent<TextMeshProUGUI>().SetText(item.itemCost.ToString());
+        int itemAdjustedCost = item.itemCost + (15 * ps.shopPurchases[positionIndex]);
+        shopItemTransform.Find("itemPrice").GetComponent<TextMeshProUGUI>().SetText(itemAdjustedCost.ToString());
         shopItemTransform.GetComponent<Button>().onClick.AddListener(onClick);
 
         buttonList.Add(shopItemTransform);

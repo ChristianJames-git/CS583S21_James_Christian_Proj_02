@@ -13,5 +13,9 @@ public class PlayerStats
     public int playerArmor = 0; //armor, resists damage
     public int purse = 0;
     public List<Item> itemList = new List<Item>();
-    public int[] shopPurchases = new int[7];
+    public int[] shopPurchases = new int[6];
+    public bool[] doorUnlocked = new bool[16];
+    public bool[] riddleComplete = new bool[13];
+    public bool[] lootCollected = new bool[6];
+    public bool spikeRingAdded;
 }

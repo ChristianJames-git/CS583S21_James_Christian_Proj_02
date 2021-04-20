@@ -2698,7 +2698,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 0
+  m_Interactable: 1
   m_TargetGraphic: {fileID: 500678404}
   m_OnClick:
     m_PersistentCalls:
@@ -83410,7 +83410,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 0
+  m_Interactable: 1
   m_TargetGraphic: {fileID: 1732326788}
   m_OnClick:
     m_PersistentCalls:
@@ -85172,7 +85172,12 @@ MonoBehaviour:
   gsm: {fileID: 1971092470}
   uiShop: {fileID: 1983248570}
   invMan: {fileID: 1525745207}
+  Chest1: {fileID: 0}
+  Chest2: {fileID: 0}
+  Potion1: {fileID: 1437252291}
   Potion2: {fileID: 2101794001}
+  FireRing: {fileID: 0}
+  Backpack: {fileID: 0}
 --- !u!58 &1971092473
 CircleCollider2D:
   m_ObjectHideFlags: 0

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class triggerSystem : MonoBehaviour
@@ -7,12 +8,24 @@ public class triggerSystem : MonoBehaviour
     [SerializeField] private GameSceneManager gsm;
     [SerializeField] private UI_Shop uiShop;
     [SerializeField] private InventoryManager invMan;
+    public GameObject Chest1;
+    public GameObject Chest2;
+    public GameObject Potion1;
     public GameObject Potion2;
-    private bool spikeRingAdded;
+    public GameObject FireRing;
+    public GameObject Backpack;
+    private List<GameObject> itemList;
 
     private void Start()
     {
+        itemList = new List<GameObject> { Chest1, Chest2, Potion1, Potion2, FireRing, Backpack };
         gm = GameManager.Instance;
+        for (int i = 0; i < gm.playerStats.lootCollected.Length; i++)
+        {
+            if (gm.playerStats.lootCollected[i]) {
+                itemList[i].SetActive(false);
+            }
+        }
     }
 
     public void OnTriggerEnter2D(Collider2D collision)
@@ -51,10 +64,10 @@ public class triggerSystem : MonoBehaviour
                 break;
             case "toFloor2":
                 gsm.Teleport(33.5f, 23f);
-                if (!spikeRingAdded)
+                if (!gm.playerStats.spikeRingAdded)
                 {
                     uiShop.CreateButton(invMan.spikeRing, 5);
-                    spikeRingAdded = true;
+                    gm.playerStats.spikeRingAdded = true;
                 }
                 break;
             case "backToFloor1":
@@ -88,11 +101,13 @@ public class triggerSystem : MonoBehaviour
             case "Chest1":
                 collision.gameObject.SetActive(false);
                 gm.playerStats.purse += 50;
+                gm.playerStats.lootCollected[0] = true;
                 break;
             case "Chest2":
                 collision.gameObject.SetActive(false);
                 invMan.AddItem(invMan.gem);
                 invMan.AddItem(invMan.potion);
+                gm.playerStats.lootCollected[1] = true;
                 break;
             case "Chest3A":
                 gsm.ChestPuzzle(0);
@@ -197,6 +212,7 @@ public class triggerSystem : MonoBehaviour
             case "Potion":
                 collision.gameObject.SetActive(false);
                 invMan.AddItem(invMan.potion);
+                gm.playerStats.lootCollected[2] = true;
                 break;
             case "FireRing":
                 collision.gameObject.SetActive(false);
